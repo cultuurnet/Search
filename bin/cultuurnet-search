@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Console\Application;
+use CultuurNet\Auth\Command\AuthenticateCommand;
+use CultuurNet\Search\Command\SearchCommand;
+
+require 'vendor/autoload.php';
+
+$app = new Application();
+
+$app->add(new AuthenticateCommand());
+$app->add(new SearchCommand());
+
+$app->run();
