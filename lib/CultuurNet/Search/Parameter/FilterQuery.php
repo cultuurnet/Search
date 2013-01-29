@@ -23,11 +23,14 @@ class FilterQuery extends AbstractParameter
     /**
      * @param string $key
      * @param string $value
+     * @return self
      */
     public function setLocalParam($key, $value)
     {
         // @todo type checking
         // @todo proper escaping?
         $this->localParams[$key] = $value;
+
+        return $this;
     }
 }

@@ -14,4 +14,17 @@ class Query extends AbstractParameter {
 
         $this->key = 'q';
     }
+
+    /**
+     * @param string $key
+     * @param string $value
+     * @return self
+     */
+    public function setLocalParam($key, $value) {
+        // @todo type checking
+        // @todo proper escaping?
+        $this->localParams[$key] = $value;
+
+        return $this;
+    }
 }
