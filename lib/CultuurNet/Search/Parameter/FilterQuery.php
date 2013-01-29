@@ -15,7 +15,19 @@ class FilterQuery extends AbstractParameter
     /**
      * @param array $tags
      */
-    public function setTags($tags) {
+    public function setTags($tags)
+    {
         $this->localParams['tag'] = implode(',', $tags);
+    }
+
+    /**
+     * @param string $key
+     * @param string $value
+     */
+    public function setLocalParam($key, $value)
+    {
+        // @todo type checking
+        // @todo proper escaping?
+        $this->localParams[$key] = $value;
     }
 }
