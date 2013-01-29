@@ -7,10 +7,7 @@ class LocalParameterSerializer
     public function serialize($localParams) {
         $keyValuePairs = array();
 
-        /* @var \CultuurNet\Search\Parameter\ParameterInterface $localParam */
-        foreach ($localParams as $localParam) {
-            $key = $localParam->getKey();
-            $value = $localParam->getValue();
+        foreach ($localParams as $key => $value) {
             // @todo check if backslashes really need to be escaped here
             $value = str_replace('\\', '\\\\', $value);
 
@@ -18,7 +15,7 @@ class LocalParameterSerializer
                 $value = '"' . str_replace('"', '\"', $value) . '"';
             }
             // @todo do we need more escaping, chars like } maybe?
-            $params[] = "{$key}={$value}";
+            $keyValuePairs[] = "{$key}={$value}";
         }
 
         $paramString = implode(' ', $keyValuePairs);
