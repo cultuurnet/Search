@@ -119,7 +119,7 @@ class Service implements ServiceInterface
 
         // @todo put response into a typed object
 
-        print $response->getRequest()->getRawHeaders();
+        //print $response->getRequest()->getRawHeaders();
 
         $body = $response->getBody(true);
 
