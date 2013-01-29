@@ -7,4 +7,6 @@ interface ParameterInterface {
     public function getKey();
 
     public function getValue();
+
+    public function getLocalParams();
 }

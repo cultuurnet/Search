@@ -8,6 +8,8 @@ use \CultuurNet\Search\ServiceInterface;
 use \CultuurNet\Search\SearchResult;
 use \CultuurNet\Search\Parameter\QueryParameterInterface;
 
+use \CultuurNet\Search\Parameter\LocalParameterSerializer;
+
 use \Guzzle\Http\Client;
 use \Guzzle\Plugin\Oauth\OauthPlugin;
 
@@ -100,11 +102,12 @@ class Service implements ServiceInterface
             }
 
             $value = '';
-            if ($parameter instanceof QueryParameterInterface) {
+            $localParams = $parameter->getLocalParams();
+            if (!empty($localParams)) {
                 if (!isset($localParameterSerializer)) {
-                    $localParameterSerializer = new \CultuurNet\Search\Parameter\LocalParameterSerializer();
+                    $localParameterSerializer = new LocalParameterSerializer();
                 }
-                $value = $localParameterSerializer->serialize($parameter->getLocalParams());
+                $value = $localParameterSerializer->serialize($localParams);
             }
 
             $value .= $parameter->getValue();

@@ -9,7 +9,7 @@ class Facet {
     /**
      * @var string
      */
-    protected $name;
+    protected $key;
 
     /**
      * @var

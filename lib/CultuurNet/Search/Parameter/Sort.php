@@ -17,6 +17,12 @@ class Sort implements ParameterInterface
      */
     protected $direction;
 
+    protected $localParams = array();
+
+    /**
+     * @param $field
+     * @param string $directionp
+     */
     public function __construct($field, $direction = self::DIRECTION_ASC)
     {
         $this->field = $field;
@@ -29,5 +35,9 @@ class Sort implements ParameterInterface
 
     public function getValue() {
         return $this->field . ' ' . $this->direction;
+    }
+
+    public function getLocalParams() {
+        return $this->localParams;
     }
 }

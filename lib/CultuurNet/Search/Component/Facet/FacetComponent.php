@@ -12,6 +12,10 @@ class FacetComponent
      */
     protected $facets = array();
 
+    /**
+     * @param $field
+     * @return \CultuurNet\Search\Parameter\FacetField
+     */
     public function facetField($field) {
         // @todo check if field isn't used yet
         $this->facets[$field] = new Facet($field, new FacetField($field));

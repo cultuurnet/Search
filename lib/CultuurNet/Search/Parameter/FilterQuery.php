@@ -11,4 +11,11 @@ class FilterQuery extends AbstractParameter
 
         $this->key = 'fq';
     }
+
+    /**
+     * @param array $tags
+     */
+    public function setTags($tags) {
+        $this->localParams['tag'] = implode(',', $tags);
+    }
 }

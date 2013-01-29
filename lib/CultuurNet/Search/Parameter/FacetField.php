@@ -13,4 +13,11 @@ class FacetField extends AbstractParameter
         // @todo check type of $fieldName, should be string
         $this->value = $fieldName;
     }
+
+    /**
+     * @param array $tags
+     */
+    public function setExcludes($tags) {
+        $this->localParams['ex'] = implode(',', $tags);
+    }
 }
