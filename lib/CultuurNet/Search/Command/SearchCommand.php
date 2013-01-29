@@ -13,6 +13,8 @@ use \Symfony\Component\Console\Input\InputOption;
 
 use \CultuurNet\Search\Parameter as Parameter;
 
+use \CultuurNet\Search\Component\Facet\FacetComponent;
+
 class SearchCommand extends Command
 {
     public function configure()
@@ -90,9 +92,12 @@ class SearchCommand extends Command
         );
 
         $facets = $in->getOption('facetField');
+        if (!empty($facets)) {
+            $facetComponent = new FacetComponent();
 
-        foreach ($facets as $facet) {
-            $parameters[] = new Parameter\FacetField($facet);
+            foreach ($facets as $facet) {
+                $parameters[] = $facetComponent->facetField($facet);
+            }
         }
 
         $fq = $in->getOption('fq');
@@ -124,6 +129,24 @@ class SearchCommand extends Command
 
         $out->writeln('total: ' . $result->getTotalCount());
         $out->writeln('current: ' . $result->getCurrentCount());
+
+        // @todo consider registering the facet component up-front
+        // as a listener to the service, to avoid the need to actively
+        // obtain the results afterwards
+        if (isset($facetComponent)) {
+            $facetComponent->obtainResults($result);
+
+            foreach ($facetComponent->getFacets() as $facet) {
+                $out->writeln(str_repeat('-', 10));
+                $out->writeln('Facet: ' . $facet->getKey());
+                $out->writeln('Results:');
+                foreach ($facet->getResult()->getItems() as $name => $number) {
+                    $out->writeln("{$name} ({$number})");
+                }
+
+                $out->writeln(str_repeat('-', 10));
+            }
+        }
 
         $currentCount = $result->getCurrentCount();
 

@@ -11,7 +11,17 @@ class SearchResult
      */
     protected $total;
 
+    /**
+     * @var ActivityStatsExtendedEntity[]
+     */
     protected $items;
+
+    /**
+     * @var \SimpleXMLElement
+     */
+    protected $xml;
+
+    protected function __construct() {}
 
     /**
      * @return ActivityStatsExtendedEntity[]
@@ -39,6 +49,8 @@ class SearchResult
 
         $result->items = array();
 
+        $result->xml = $xmlElement;
+
         /* @var \SimpleXMLElement $xmlItem */
         foreach ($xmlElement->items->item as $xmlItem) {
             $result->items[] = ActivityStatsExtendedEntity::fromXml($xmlItem);
@@ -47,5 +59,12 @@ class SearchResult
         // @todo How to handle other on-demand components, like facets?
 
         return $result;
+    }
+
+    /**
+     * @return \SimpleXMLElement
+     */
+    public function getXml() {
+        return $this->xml;
     }
 }

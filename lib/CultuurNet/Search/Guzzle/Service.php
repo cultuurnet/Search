@@ -90,6 +90,7 @@ class Service implements ServiceInterface
         $client = $this->getClient();
 
         $request = $client->get('search');
+        $request->getQuery()->setAggregateFunction(array('\Guzzle\Http\QueryString', 'aggregateUsingDuplicates'));
 
         $qFound = FALSE;
 
