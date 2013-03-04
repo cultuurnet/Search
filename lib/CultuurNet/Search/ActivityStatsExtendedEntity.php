@@ -46,8 +46,9 @@ class ActivityStatsExtendedEntity {
         /* @var \SimpleXMLElement $child */
         foreach ($xmlElement->children() as $child) {
             //var_dump($child->getName());
-            if (preg_match('/^([a-z]+)Count$/', $child->getName(), $matches) == 1) {
-                $extendedEntity->activityCounts[$matches[1]] = (string) $child;
+            if ($child->getName() == 'activity') {
+                $activityType = (string) $child->attributes()->type;
+                $extendedEntity->activityCounts[$activityType] = (string) $child;
             }
         }
 
