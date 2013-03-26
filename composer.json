@@ -5,7 +5,7 @@
     "require": {
         "php": ">=5.3.0",
         "cultuurnet/auth": "1.0.*@dev",
-        "cultuurnet/cdb": "1.0.*@dev",
+        "cultuurnet/cdb": "2.*@dev",
         "guzzle/http": "3.1.*",
         "guzzle/plugin-oauth": "3.1.*",
         "symfony/console": "2.2.*@dev"

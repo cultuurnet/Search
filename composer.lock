@@ -1,29 +1,28 @@
 {
-    "hash": "ef5e32684e68b97db16e11c43220ea19",
+    "hash": "6e01e3b764b7352b21e35c97170de50b",
     "packages": [
         {
             "name": "cultuurnet/auth",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "http://github.com/cultuurnet/Auth",
-                "reference": "d6ecfbab8925fb1766bbc73bf38ebafabbeb0e16"
+                "url": "https://github.com/cultuurnet/Auth.git",
+                "reference": "75a034f3504bd013f28ee5e3a814f11c712537ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/cultuurnet/Auth/archive/d6ecfbab8925fb1766bbc73bf38ebafabbeb0e16.zip",
-                "reference": "d6ecfbab8925fb1766bbc73bf38ebafabbeb0e16",
+                "url": "https://api.github.com/repos/cultuurnet/Auth/zipball/75a034f3504bd013f28ee5e3a814f11c712537ee",
+                "reference": "75a034f3504bd013f28ee5e3a814f11c712537ee",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0",
-                "justinrainbow/json-schema": "1.1.*",
-                "symfony/console": "2.2.*@dev",
                 "guzzle/http": "3.1.*",
+                "guzzle/plugin-cookie": "3.1.*",
                 "guzzle/plugin-oauth": "3.1.*",
-                "guzzle/plugin-cookie": "3.1.*"
+                "justinrainbow/json-schema": "1.1.*",
+                "php": ">=5.3.0",
+                "symfony/console": "2.2.*@dev"
             },
-            "time": "2013-01-27 11:44:36",
             "bin": [
                 "bin/cultuurnet-auth"
             ],
@@ -40,27 +39,27 @@
                     ]
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "Apache-2.0"
             ],
-            "description": "Authentication service for CultuurNet web services"
+            "description": "Authentication service for CultuurNet web services",
+            "time": "2013-03-17 11:07:57"
         },
         {
             "name": "cultuurnet/cdb",
-            "version": "dev-master",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
-                "url": "http://github.com/cultuurnet/Cdb",
-                "reference": "eed3477080b597af2ab77570d9aad36c856b7c40"
+                "url": "https://github.com/cultuurnet/Cdb.git",
+                "reference": "dec378511e957f3429244dabc54f0d04ab318439"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/cultuurnet/Cdb/archive/eed3477080b597af2ab77570d9aad36c856b7c40.zip",
-                "reference": "eed3477080b597af2ab77570d9aad36c856b7c40",
+                "url": "https://api.github.com/repos/cultuurnet/Cdb/zipball/dec378511e957f3429244dabc54f0d04ab318439",
+                "reference": "dec378511e957f3429244dabc54f0d04ab318439",
                 "shasum": ""
             },
-            "time": "2013-01-27 11:04:24",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -74,11 +73,12 @@
                     ]
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "Apache-2.0"
             ],
-            "description": "PHP library for hydrating/manipulating CultuurNet's Cdb XML documents"
+            "description": "PHP library for hydrating/manipulating CultuurNet's Cdb XML documents",
+            "time": "2013-03-26 11:02:43"
         },
         {
             "name": "guzzle/common",
@@ -99,7 +99,6 @@
                 "php": ">=5.3.2",
                 "symfony/event-dispatcher": ">=2.1"
             },
-            "time": "2013-01-28 00:07:40",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -111,18 +110,19 @@
                     "Guzzle\\Common": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Common libraries used by Guzzle",
             "homepage": "http://guzzlephp.org/",
             "keywords": [
-                "event",
-                "exception",
+                "collection",
                 "common",
-                "collection"
-            ]
+                "event",
+                "exception"
+            ],
+            "time": "2013-01-28 00:07:40"
         },
         {
             "name": "guzzle/http",
@@ -140,15 +140,14 @@
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2",
                 "guzzle/common": "self.version",
                 "guzzle/parser": "self.version",
-                "guzzle/stream": "self.version"
+                "guzzle/stream": "self.version",
+                "php": ">=5.3.2"
             },
             "suggest": {
                 "ext-curl": "*"
             },
-            "time": "2013-01-26 08:20:43",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -160,7 +159,7 @@
                     "Guzzle\\Http": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -174,12 +173,13 @@
             "description": "HTTP libraries used by Guzzle",
             "homepage": "http://guzzlephp.org/",
             "keywords": [
+                "Guzzle",
+                "client",
                 "curl",
                 "http",
-                "http client",
-                "client",
-                "Guzzle"
-            ]
+                "http client"
+            ],
+            "time": "2013-01-26 08:20:43"
         },
         {
             "name": "guzzle/parser",
@@ -199,7 +199,6 @@
             "require": {
                 "php": ">=5.3.2"
             },
-            "time": "2013-01-12 21:43:21",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -211,19 +210,20 @@
                     "Guzzle\\Parser": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Interchangeable parsers used by Guzzle",
             "homepage": "http://guzzlephp.org/",
             "keywords": [
-                "http",
-                "url",
-                "message",
+                "URI Template",
                 "cookie",
-                "URI Template"
-            ]
+                "http",
+                "message",
+                "url"
+            ],
+            "time": "2013-01-12 21:43:21"
         },
         {
             "name": "guzzle/plugin-cookie",
@@ -241,10 +241,9 @@
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2",
-                "guzzle/http": "self.version"
+                "guzzle/http": "self.version",
+                "php": ">=5.3.2"
             },
-            "time": "2012-12-07 16:45:11",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -256,7 +255,7 @@
                     "Guzzle\\Plugin\\Cookie": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -270,9 +269,10 @@
             "description": "Guzzle cookie plugin",
             "homepage": "http://guzzlephp.org/",
             "keywords": [
-                "plugin",
-                "Guzzle"
-            ]
+                "Guzzle",
+                "plugin"
+            ],
+            "time": "2012-12-07 16:45:11"
         },
         {
             "name": "guzzle/plugin-oauth",
@@ -290,10 +290,9 @@
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2",
-                "guzzle/http": "self.version"
+                "guzzle/http": "self.version",
+                "php": ">=5.3.2"
             },
-            "time": "2012-12-07 16:45:11",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -305,7 +304,7 @@
                     "Guzzle\\Plugin\\Oauth": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -319,10 +318,11 @@
             "description": "Guzzle OAuth plugin",
             "homepage": "http://guzzlephp.org/",
             "keywords": [
-                "plugin",
+                "Guzzle",
                 "oauth",
-                "Guzzle"
-            ]
+                "plugin"
+            ],
+            "time": "2012-12-07 16:45:11"
         },
         {
             "name": "guzzle/stream",
@@ -340,10 +340,9 @@
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2",
-                "guzzle/common": "self.version"
+                "guzzle/common": "self.version",
+                "php": ">=5.3.2"
             },
-            "time": "2012-12-07 16:45:11",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -355,7 +354,7 @@
                     "Guzzle\\Stream": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -369,10 +368,11 @@
             "description": "Guzzle stream wrapper component",
             "homepage": "http://guzzlephp.org/",
             "keywords": [
-                "stream",
                 "Guzzle",
-                "component"
-            ]
+                "component",
+                "stream"
+            ],
+            "time": "2012-12-07 16:45:11"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -384,21 +384,20 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/justinrainbow/json-schema/zipball/v1.1.0",
+                "url": "https://github.com/justinrainbow/json-schema/archive/v1.1.0.zip",
                 "reference": "v1.1.0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2012-01-02 16:33:17",
             "type": "library",
             "autoload": {
                 "psr-0": {
                     "JsonSchema": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "NewBSD"
             ],
@@ -427,27 +426,27 @@
             "keywords": [
                 "json",
                 "schema"
-            ]
+            ],
+            "time": "2012-01-03 00:33:17"
         },
         {
             "name": "symfony/console",
-            "version": "dev-master",
+            "version": "2.2.x-dev",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Console",
-                "reference": "fdb2d9320106926266a0f7a5a97aab7213e11ad6"
+                "url": "https://github.com/symfony/Console.git",
+                "reference": "d146fc32a9cf13bc479820e515048298a34cd432"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/Console/archive/fdb2d9320106926266a0f7a5a97aab7213e11ad6.zip",
-                "reference": "fdb2d9320106926266a0f7a5a97aab7213e11ad6",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/d146fc32a9cf13bc479820e515048298a34cd432",
+                "reference": "d146fc32a9cf13bc479820e515048298a34cd432",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2013-01-24 15:55:08",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -459,7 +458,7 @@
                     "Symfony\\Component\\Console\\": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -474,41 +473,46 @@
                 }
             ],
             "description": "Symfony Console Component",
-            "homepage": "http://symfony.com"
+            "homepage": "http://symfony.com",
+            "time": "2013-03-19 20:48:08"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.1.7",
+            "version": "v2.2.0",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/EventDispatcher",
-                "reference": "v2.1.7"
+                "url": "https://github.com/symfony/EventDispatcher.git",
+                "reference": "v2.2.0-RC3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/EventDispatcher/archive/v2.1.7.zip",
-                "reference": "v2.1.7",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/v2.2.0-RC3",
+                "reference": "v2.2.0-RC3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "symfony/dependency-injection": "2.1.*"
+                "symfony/dependency-injection": ">=2.0,<3.0"
             },
             "suggest": {
-                "symfony/dependency-injection": "2.1.*",
-                "symfony/http-kernel": "2.1.*"
+                "symfony/dependency-injection": "2.2.*",
+                "symfony/http-kernel": "2.2.*"
             },
-            "time": "2013-01-11 00:31:43",
             "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\EventDispatcher": ""
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\EventDispatcher\\": ""
+                }
+            },
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -523,7 +527,8 @@
                 }
             ],
             "description": "Symfony EventDispatcher Component",
-            "homepage": "http://symfony.com"
+            "homepage": "http://symfony.com",
+            "time": "2013-02-11 11:26:43"
         }
     ],
     "packages-dev": null,
