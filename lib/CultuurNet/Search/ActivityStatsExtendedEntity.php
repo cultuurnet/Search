@@ -42,13 +42,15 @@ class ActivityStatsExtendedEntity {
       $extendedEntity = new static();
       $type = $xmlElement->getName();
 
+      // Add the different activity counts.
       if (!empty($xmlElement->activities)) {
         foreach ($xmlElement->activities->activity as $activity) {
-          $activityType = (string) $child->attributes()->type;
-          $extendedEntity->activityCounts[$activityType] = (string) $child;
+          $activityType = (string) $activity->attributes()->type;
+          $extendedEntity->activityCounts[$activityType] = (int) $activity->attributes()->count;
         }
       }
 
+      // Return the correct cdb item.
       switch ($type) {
 
         case 'event':
