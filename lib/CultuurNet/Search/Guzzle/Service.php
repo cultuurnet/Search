@@ -126,33 +126,9 @@ class Service implements ServiceInterface
         //print $response->getRequest()->getRawHeaders();
 
         $body = $response->getBody(true);
+        $xml = new SimpleXMLElement($body, 0, FALSE, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
 
-        // @todo remove debug info
-        $dom = new \DOMDocument('1.0', 'utf-8');
-        $dom->loadXML($body);
-        $dom->formatOutput = TRUE;
+        return SearchResult::fromXml($xml);
 
-        // for now we need to change the namespace of 'event' elements,
-        // as they are not in namespaced with http://www.cultuurdatabank.com/XMLSchema/CdbXSD/3.1/FINAL
-        /* @var \DomElement $node */
-        foreach ($dom->getElementsByTagName('event') as $node) {
-            $newNode = $node->ownerDocument->createElementNS('http://www.cultuurdatabank.com/XMLSchema/CdbXSD/3.1/FINAL', 'event');
-
-            foreach ($node->attributes as $attribute) {
-                $newNode->setAttribute($attribute->nodeName, $attribute->nodeValue);
-            }
-
-            while ($node->firstChild) {
-                $newNode->appendChild($node->firstChild);
-            }
-            $node->parentNode->replaceChild($newNode, $node);
-            //$element->parentNode->replaceChild($newNode, $element);
-        }
-
-        $xml = simplexml_import_dom($dom);
-
-        $result = SearchResult::fromXml($xml);
-
-        return $result;
     }
 }

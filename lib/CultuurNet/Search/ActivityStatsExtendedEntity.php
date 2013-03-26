@@ -38,32 +38,31 @@ class ActivityStatsExtendedEntity {
      * @param SimpleXMLElement $xmlElement
      */
     public static function fromXml(SimpleXMLElement $xmlElement) {
-        $extendedEntity = new static();
 
-        // @todo check if type is set
-        $type = (string) $xmlElement->attributes()->type;
+      $extendedEntity = new static();
+      $type = $xmlElement->getName();
 
-        /* @var \SimpleXMLElement $child */
-        foreach ($xmlElement->children() as $child) {
-            //var_dump($child->getName());
-            if ($child->getName() == 'activity') {
-                $activityType = (string) $child->attributes()->type;
-                $extendedEntity->activityCounts[$activityType] = (string) $child;
-            }
+      if (!empty($xmlElement->activities)) {
+        foreach ($xmlElement->activities->activity as $activity) {
+          $activityType = (string) $child->attributes()->type;
+          $extendedEntity->activityCounts[$activityType] = (string) $child;
         }
+      }
 
-        foreach ($xmlElement->children('http://www.cultuurdatabank.com/XMLSchema/CdbXSD/3.1/FINAL') as $child) {
-            if ($child->getName() === $type) {
-                switch ($type) {
-                    case 'event':
-                        $extendedEntity->entity = CultureFeed_Cdb_Item_Event::parseFromCdbXml($child);
-                        break;
-                    case 'actor':
-                    case 'production':
-                        // @todo these cases first require an implementation in the Cdb library
-                }
-            }
-        }
+      switch ($type) {
+
+        case 'event':
+          $extendedEntity->entity = CultureFeed_Cdb_Item_Event::parseFromCdbXml($xmlElement);
+        break;
+
+        case 'actor':
+        case 'production':
+          // @todo these cases first require an implementation in the Cdb library
+
+        default:
+        return NULL;
+
+      }
 
         return $extendedEntity;
     }

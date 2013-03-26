@@ -31,17 +31,20 @@ class FacetComponent
     }
 
     public function obtainResults(SearchResult $result) {
-        // @todo get results from xml and fill the # facets
-        foreach ($this->facets as $facet) {
-            $xml = $result->getXml();
 
-            if (!empty($xml->facets)) {
-                foreach ($xml->facets->facet as $facetElement) {
-                    if ((string)$facetElement->field === $facet->getKey()) {
-                        $facet->getResult()->addItem((string) $facetElement->name, (string) $facetElement->count);
-                    }
-                }
-            }
+      $xml = $result->getXml();
+
+      if (!empty($xml->facets)) {
+        foreach ($xml->facets->facet as $facetElement) {
+
+          $facetAttributes = $facetElement->attributes();
+          if (isset($this->facets[(string) $facetAttributes['field']])) {
+            $facet = $this->facets[(string) $facetAttributes['field']];
+            $facet->getResult()->addItem((string) $facetAttributes['name'], (int) $facetAttributes['total']);
+          }
+
         }
+      }
+
     }
 }

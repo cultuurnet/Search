@@ -45,15 +45,18 @@ class SearchResult
     {
         $result = new static();
 
-        $result->total = intval($xmlElement->total);
+        $result->total = intval($xmlElement->nofrecords);
 
         $result->items = array();
 
         $result->xml = $xmlElement;
 
         /* @var \SimpleXMLElement $xmlItem */
-        foreach ($xmlElement->items->item as $xmlItem) {
-            $result->items[] = ActivityStatsExtendedEntity::fromXml($xmlItem);
+        foreach ($xmlElement as $xmlItem) {
+          $entity = ActivityStatsExtendedEntity::fromXml($xmlItem);
+          if ($entity) {
+            $result->items[] = $entity;
+          }
         }
 
         // @todo How to handle other on-demand components, like facets?
