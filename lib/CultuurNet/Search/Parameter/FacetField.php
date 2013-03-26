@@ -2,22 +2,23 @@
 
 namespace CultuurNet\Search\Parameter;
 
-class FacetField extends AbstractParameter
-{
-    /**
-     * @param $fieldName
-     */
-    public function __construct($fieldName) {
-        $this->key = 'facetField';
+class FacetField extends AbstractParameter {
 
-        // @todo check type of $fieldName, should be string
-        $this->value = $fieldName;
-    }
+  /**
+   * @param $fieldName
+   */
+  public function __construct($fieldName) {
+    $this->key = 'facetField';
 
-    /**
-     * @param array $tags
-     */
-    public function setExcludes($tags) {
-        $this->localParams['ex'] = implode(',', $tags);
-    }
+    // @todo check type of $fieldName, should be string
+    $this->value = $fieldName;
+  }
+
+  /**
+   * @param array $tags
+   */
+  public function setExcludes($tags) {
+    $this->localParams['ex'] = implode(',', $tags);
+  }
+
 }

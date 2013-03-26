@@ -5,46 +5,46 @@ namespace CultuurNet\Search\Component\Facet;
 use \CultuurNet\Search\Parameter\FacetField;
 use \CultuurNet\Search\SearchResult;
 
-class FacetComponent
-{
-    /**
-     * @var Facet[]
-     */
-    protected $facets = array();
+class FacetComponent {
 
-    /**
-     * @param $field
-     * @return \CultuurNet\Search\Parameter\FacetField
-     */
-    public function facetField($field) {
-        // @todo check if field isn't used yet
-        $this->facets[$field] = new Facet($field, new FacetField($field));
+  /**
+   * @var Facet[]
+   */
+  protected $facets = array();
 
-        return $this->facets[$field]->getParameter();
-    }
+  /**
+   * @param $field
+   * @return \CultuurNet\Search\Parameter\FacetField
+   */
+  public function facetField($field) {
+    // @todo check if field isn't used yet
+    $this->facets[$field] = new Facet($field, new FacetField($field));
 
-    /**
-     * @return Facet[]
-     */
-    public function getFacets() {
-        return $this->facets;
-    }
+    return $this->facets[$field]->getParameter();
+  }
 
-    public function obtainResults(SearchResult $result) {
+  /**
+   * @return Facet[]
+   */
+  public function getFacets() {
+    return $this->facets;
+  }
 
-      $xml = $result->getXml();
+  public function obtainResults(SearchResult $result) {
 
-      if (!empty($xml->facets)) {
-        foreach ($xml->facets->facet as $facetElement) {
+    $xml = $result->getXml();
 
-          $facetAttributes = $facetElement->attributes();
-          if (isset($this->facets[(string) $facetAttributes['field']])) {
-            $facet = $this->facets[(string) $facetAttributes['field']];
-            $facet->getResult()->addItem((string) $facetAttributes['name'], (int) $facetAttributes['total']);
-          }
+    if (!empty($xml->facets)) {
+      foreach ($xml->facets->facet as $facetElement) {
 
+        $facetAttributes = $facetElement->attributes();
+        if (isset($this->facets[(string) $facetAttributes['field']])) {
+          $facet = $this->facets[(string) $facetAttributes['field']];
+          $facet->getResult()->addItem((string) $facetAttributes['name'], (int) $facetAttributes['total']);
         }
-      }
 
+      }
     }
+
+  }
 }

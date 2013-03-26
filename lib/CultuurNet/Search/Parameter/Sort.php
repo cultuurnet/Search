@@ -2,42 +2,42 @@
 
 namespace CultuurNet\Search\Parameter;
 
-class Sort implements ParameterInterface
-{
-    const DIRECTION_ASC = 'asc';
-    const DIRECTION_DESC = 'desc';
+class Sort implements ParameterInterface {
 
-    /**
-     * @var string
-     */
-    protected $field;
+  const DIRECTION_ASC = 'asc';
+  const DIRECTION_DESC = 'desc';
 
-    /**
-     * @var string
-     */
-    protected $direction;
+  /**
+   * @var string
+   */
+  protected $field;
 
-    protected $localParams = array();
+  /**
+   * @var string
+   */
+  protected $direction;
 
-    /**
-     * @param $field
-     * @param string $directionp
-     */
-    public function __construct($field, $direction = self::DIRECTION_ASC)
-    {
-        $this->field = $field;
-        $this->direction = $direction;
-    }
+  protected $localParams = array();
 
-    public function getKey() {
-        return 'sort';
-    }
+  /**
+   * @param $field
+   * @param string $directionp
+   */
+  public function __construct($field, $direction = self::DIRECTION_ASC) {
+    $this->field = $field;
+    $this->direction = $direction;
+  }
 
-    public function getValue() {
-        return $this->field . ' ' . $this->direction;
-    }
+  public function getKey() {
+    return 'sort';
+  }
 
-    public function getLocalParams() {
-        return $this->localParams;
-    }
+  public function getValue() {
+    return $this->field . ' ' . $this->direction;
+  }
+
+  public function getLocalParams() {
+    return $this->localParams;
+  }
+
 }

@@ -2,31 +2,29 @@
 
 namespace CultuurNet\Search\Parameter;
 
-class Parameter implements ParameterInterface
-{
-    /**
-     * @var string
-     */
-    protected $key;
+class Parameter implements ParameterInterface {
 
-    /**
-     * @var string
-     */
-    protected $value;
+  /**
+   * @var string
+   */
+  protected $key;
 
-    public function __construct($key, $value)
-    {
-        $this->key = $key;
-        $this->value = $value;
-    }
+  /**
+   * @var string
+   */
+  protected $value;
 
-    public function getKey()
-    {
-        return $this->key;
-    }
+  public function __construct($key, $value) {
+    $this->key = $key;
+    $this->value = $value;
+  }
 
-    public function getValue()
-    {
-        return $this->value;
-    }
+  public function getKey() {
+    return $this->key;
+  }
+
+  public function getValue() {
+    return $this->value;
+  }
+
 }

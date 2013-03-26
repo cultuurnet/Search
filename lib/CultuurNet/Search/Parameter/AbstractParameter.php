@@ -4,21 +4,21 @@ namespace CultuurNet\Search\Parameter;
 
 abstract class AbstractParameter implements ParameterInterface {
 
-    protected $key;
+  protected $key;
 
-    protected $value;
+  protected $value;
 
-    protected $localParams = array();
+  protected $localParams = array();
 
-    public function getKey() {
-        return $this->key;
-    }
+  public function getKey() {
+    return $this->key;
+  }
 
-    public function getValue() {
-        return $this->value;
-    }
+  public function getValue() {
+    return $this->value;
+  }
 
-    public function getLocalParams() {
-        return $this->localParams;
-    }
+  public function getLocalParams() {
+    return $this->localParams;
+  }
 }

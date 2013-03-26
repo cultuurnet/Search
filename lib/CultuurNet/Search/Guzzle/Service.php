@@ -18,117 +18,109 @@ use \Guzzle\Http\Url;
 use \SimpleXMLElement;
 use \DOMDocument;
 
-class Service implements ServiceInterface
-{
-    /**
-     * @var string
-     */
-    protected $endpoint;
+class Service implements ServiceInterface {
 
-    /**
-     * @var \CultuurNet\Auth\ConsumerCredentials
-     */
-    protected $consumerCredentials;
+  /**
+   * @var string
+   */
+  protected $endpoint;
 
-    /**
-     * @var \CultuurNet\Auth\TokenCredentials
-     */
-    protected $tokenCredentials;
+  /**
+   * @var \CultuurNet\Auth\ConsumerCredentials
+   */
+  protected $consumerCredentials;
 
-    /**
-     * @var \Guzzle\Http\Client;
-     */
-    protected $client;
+  /**
+   * @var \CultuurNet\Auth\TokenCredentials
+   */
+  protected $tokenCredentials;
 
-    /**
-     * @param string $endpoint
-     * @param \CultuurNet\Auth\ConsumerCredentials $consumerCredentials
-     * @param \CultuurNet\Auth\TokenCredentials $tokenCredentials
-     */
-    public function __construct($endpoint, ConsumerCredentials $consumerCredentials, TokenCredentials $tokenCredentials = null)
-    {
-        // @todo check type of endpoint
-        $this->consumerCredentials = $consumerCredentials;
-        $this->tokenCredentials = $tokenCredentials;
-        $this->client = null;
-        $this->endpoint = $endpoint;
+  /**
+   * @var \Guzzle\Http\Client;
+   */
+  protected $client;
+
+  /**
+   * @param string $endpoint
+   * @param \CultuurNet\Auth\ConsumerCredentials $consumerCredentials
+   * @param \CultuurNet\Auth\TokenCredentials $tokenCredentials
+   */
+  public function __construct($endpoint, ConsumerCredentials $consumerCredentials, TokenCredentials $tokenCredentials = null) {
+    // @todo check type of endpoint
+    $this->consumerCredentials = $consumerCredentials;
+    $this->tokenCredentials = $tokenCredentials;
+    $this->client = null;
+    $this->endpoint = $endpoint;
+  }
+
+  /**
+   * @return \Guzzle\Http\Client
+   */
+  protected function getClient() {
+    if (null === $this->client) {
+      $this->client = new Client($this->endpoint);
+
+      $config = array(
+        'consumer_key' => $this->consumerCredentials->getKey(),
+        'consumer_secret' => $this->consumerCredentials->getSecret(),
+      );
+
+      if (null !== $this->tokenCredentials) {
+        $config += array(
+          'token' => $this->tokenCredentials->getToken(),
+          'token_secret' => $this->tokenCredentials->getSecret(),
+        );
+      }
+
+      $oAuthPlugin = new OauthPlugin($config);
+      $this->client->addSubscriber($oAuthPlugin);
     }
 
-    /**
-     * @return \Guzzle\Http\Client
-     */
-    protected function getClient()
-    {
-        if (null === $this->client) {
-            $this->client = new Client($this->endpoint);
+    return $this->client;
+  }
 
-            $config = array(
-                'consumer_key' => $this->consumerCredentials->getKey(),
-                'consumer_secret' => $this->consumerCredentials->getSecret(),
-            );
+  /**
+   * @param array $searchParameters
+   * @todo maybe $parameters should be a typed object, like a ParameterBag or something,
+   * by doing this we can ensure any items inside implement the ParameterInterface
+   * @return SearchResult
+   */
+  public function search($parameters = array()) {
+    $client = $this->getClient();
 
-            if (null !== $this->tokenCredentials) {
-                $config += array(
-                    'token' => $this->tokenCredentials->getToken(),
-                    'token_secret' => $this->tokenCredentials->getSecret(),
-                );
-            }
+    $request = $client->get('search');
+    $request->getQuery()->setAggregateFunction(array('\Guzzle\Http\QueryString', 'aggregateUsingDuplicates'));
 
-            $oAuthPlugin = new OauthPlugin($config);
-            $this->client->addSubscriber($oAuthPlugin);
+    $qFound = FALSE;
+
+    foreach ($parameters as $parameter) {
+      if ('q' == $parameter->getKey()) {
+        $qFound = TRUE;
+      }
+
+      $value = '';
+      $localParams = $parameter->getLocalParams();
+      if (!empty($localParams)) {
+        if (!isset($localParameterSerializer)) {
+          $localParameterSerializer = new LocalParameterSerializer();
         }
+        $value = $localParameterSerializer->serialize($localParams);
+      }
 
-        return $this->client;
+      $value .= $parameter->getValue();
+
+      $request->getQuery()->add($parameter->getKey(), $value);
     }
 
-    /**
-     * @param array $searchParameters
-     * @todo maybe $parameters should be a typed object, like a ParameterBag or something,
-     * by doing this we can ensure any items inside implement the ParameterInterface
-     * @return SearchResult
-     */
-    public function search($parameters = array())
-    {
-        $client = $this->getClient();
-
-        $request = $client->get('search');
-        $request->getQuery()->setAggregateFunction(array('\Guzzle\Http\QueryString', 'aggregateUsingDuplicates'));
-
-        $qFound = FALSE;
-
-        foreach ($parameters as $parameter) {
-            if ('q' == $parameter->getKey()) {
-                $qFound = TRUE;
-            }
-
-            $value = '';
-            $localParams = $parameter->getLocalParams();
-            if (!empty($localParams)) {
-                if (!isset($localParameterSerializer)) {
-                    $localParameterSerializer = new LocalParameterSerializer();
-                }
-                $value = $localParameterSerializer->serialize($localParams);
-            }
-
-            $value .= $parameter->getValue();
-
-            $request->getQuery()->add($parameter->getKey(), $value);
-        }
-
-        if (!$qFound) {
-            // @todo throw an exception because the only mandatory parameter is not present
-        }
-
-        $response = $request->send();
-
-        // @todo put response into a typed object
-
-        //print $response->getRequest()->getRawHeaders();
-
-        $body = $response->getBody(true);
-        $xml = new SimpleXMLElement($body, 0, FALSE, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
-
-        return SearchResult::fromXml($xml);
-
+    if (!$qFound) {
+      // @todo throw an exception because the only mandatory parameter is not present
     }
+
+    $response = $request->send();
+    $body = $response->getBody(true);
+    $xml = new SimpleXMLElement($body, 0, FALSE, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
+
+    return SearchResult::fromXml($xml);
+
+  }
 }

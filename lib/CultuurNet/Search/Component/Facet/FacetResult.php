@@ -2,18 +2,19 @@
 
 namespace CultuurNet\Search\Component\Facet;
 
-class FacetResult
-{
-    /**
-     * @var array
-     */
-    protected $items = array();
+class FacetResult {
 
-    public function addItem($name, $number) {
-        $this->items[$name] = $number;
-    }
+  /**
+   * @var array
+   */
+  protected $items = array();
 
-    public function getItems() {
-        return $this->items;
-    }
+  public function addItem($name, $number) {
+    $this->items[$name] = $number;
+  }
+
+  public function getItems() {
+    return $this->items;
+  }
+
 }
