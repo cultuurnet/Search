@@ -13,9 +13,14 @@ class ActivityStatsExtendedEntity {
   protected $activityCounts;
 
   /**
-   * @var mixed
+   * @var CultureFeed_Cdb_Item_Base
    */
   protected $entity;
+
+  /**
+   * @var string
+   */
+  protected $type;
 
   /**
    * @param string $activityType
@@ -30,8 +35,19 @@ class ActivityStatsExtendedEntity {
     return $this->activityCounts[$activityType];
   }
 
+  /**
+   * Get the entity.
+   * @return CultureFeed_Cdb_Item_Base
+   */
   public function getEntity() {
     return $this->entity;
+  }
+
+  /**
+   * Get the type of element.
+   */
+  public function getType() {
+    return $this->type;
   }
 
   /**
@@ -40,7 +56,7 @@ class ActivityStatsExtendedEntity {
   public static function fromXml(SimpleXMLElement $xmlElement) {
 
     $extendedEntity = new static();
-    $type = $xmlElement->getName();
+    $extendedEntity->type = $xmlElement->getName();
 
     // Add the different activity counts.
     if (!empty($xmlElement->activities)) {
@@ -51,7 +67,7 @@ class ActivityStatsExtendedEntity {
     }
 
     // Return the correct cdb item.
-    switch ($type) {
+    switch ($extendedEntity->type) {
 
       case 'event':
         $extendedEntity->entity = CultureFeed_Cdb_Item_Event::parseFromCdbXml($xmlElement);
@@ -67,5 +83,6 @@ class ActivityStatsExtendedEntity {
     }
 
     return $extendedEntity;
+
   }
 }

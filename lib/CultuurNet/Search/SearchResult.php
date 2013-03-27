@@ -5,6 +5,7 @@ namespace CultuurNet\Search;
 use \SimpleXMLElement;
 
 class SearchResult {
+
   /**
    * @var integer
    */
@@ -13,15 +14,12 @@ class SearchResult {
   /**
    * @var ActivityStatsExtendedEntity[]
    */
-  protected $items;
+  protected $items = array();
 
   /**
    * @var \SimpleXMLElement
    */
   protected $xml;
-
-  protected function __construct() {
-  }
 
   /**
    * @return ActivityStatsExtendedEntity[]
@@ -41,16 +39,18 @@ class SearchResult {
     return $this->total;
   }
 
+  /**
+   * Construct the search result based on the given result xml.
+   * @param SimpleXMLElement $xmlElement
+   * @return \CultuurNet\Search\SearchResult
+   */
   public static function fromXml(SimpleXMLElement $xmlElement) {
+
     $result = new static();
 
     $result->total = intval($xmlElement->nofrecords);
-
-    $result->items = array();
-
     $result->xml = $xmlElement;
 
-    /* @var \SimpleXMLElement $xmlItem */
     foreach ($xmlElement as $xmlItem) {
       $entity = ActivityStatsExtendedEntity::fromXml($xmlItem);
       if ($entity) {
@@ -58,9 +58,8 @@ class SearchResult {
       }
     }
 
-    // @todo How to handle other on-demand components, like facets?
-
     return $result;
+
   }
 
   /**
