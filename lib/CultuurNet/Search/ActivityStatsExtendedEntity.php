@@ -2,7 +2,6 @@
 
 namespace CultuurNet\Search;
 
-use \CultureFeed_Cdb_Item_Event;
 use \SimpleXMLElement;
 
 class ActivityStatsExtendedEntity {
@@ -55,6 +54,11 @@ class ActivityStatsExtendedEntity {
    */
   public static function fromXml(SimpleXMLElement $xmlElement) {
 
+    $cdbItem = \CultureFeed_Cdb_Default::parseItem($xmlElement);
+    if (!$cdbItem) {
+      return NULL;
+    }
+
     $extendedEntity = new static();
     $extendedEntity->type = $xmlElement->getName();
 
@@ -66,21 +70,7 @@ class ActivityStatsExtendedEntity {
       }
     }
 
-    // Return the correct cdb item.
-    switch ($extendedEntity->type) {
-
-      case 'event':
-        $extendedEntity->entity = CultureFeed_Cdb_Item_Event::parseFromCdbXml($xmlElement);
-        break;
-
-      case 'actor':
-      case 'production':
-        // @todo these cases first require an implementation in the Cdb library
-
-      default:
-        return NULL;
-
-    }
+    $extendedEntity->entity = $cdbItem;
 
     return $extendedEntity;
 

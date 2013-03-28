@@ -5,12 +5,12 @@ namespace CultuurNet\Search\Component\Facet;
 class FacetResult {
 
   /**
-   * @var array
+   * @var FacetResultItem[]
    */
   protected $items = array();
 
-  public function addItem($name, $number) {
-    $this->items[$name] = $number;
+  public function addItem(FacetResultItem $item) {
+    $this->items[] = $item;
   }
 
   public function getItems() {
