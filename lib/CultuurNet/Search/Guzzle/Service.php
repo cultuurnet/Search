@@ -6,8 +6,10 @@ use \CultuurNet\Auth\ConsumerCredentials;
 use \CultuurNet\Auth\TokenCredentials;
 use \CultuurNet\Search\ServiceInterface;
 use \CultuurNet\Search\SearchResult;
-use \CultuurNet\Search\Parameter\QueryParameterInterface;
+use \CultuurNet\Search\SuggestionsResult;
 
+use \CultuurNet\Search\Parameter\Query;
+use \CultuurNet\Search\Parameter\QueryParameterInterface;
 use \CultuurNet\Search\Parameter\LocalParameterSerializer;
 
 use \Guzzle\Http\Client;
@@ -80,6 +82,7 @@ class Service implements ServiceInterface {
   }
 
   /**
+   * Execute a search call to the service.
    * @param array $searchParameters
    * @todo maybe $parameters should be a typed object, like a ParameterBag or something,
    * by doing this we can ensure any items inside implement the ParameterInterface
@@ -94,6 +97,7 @@ class Service implements ServiceInterface {
     $qFound = FALSE;
 
     foreach ($parameters as $parameter) {
+
       if ('q' == $parameter->getKey()) {
         $qFound = TRUE;
       }
@@ -117,10 +121,29 @@ class Service implements ServiceInterface {
     }
 
     $response = $request->send();
-    $body = $response->getBody(true);
-    $xml = new SimpleXMLElement($body, 0, FALSE, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
+    $xml = new SimpleXMLElement($response->getBody(true), 0, FALSE, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
 
     return SearchResult::fromXml($xml);
 
   }
+
+  /**
+   * Get a list of suggestions from the given search string.
+   * @param string $search
+   *   String to get suggestions for.
+   */
+  public function searchSuggestions($search_string) {
+
+    $client = $this->getClient();
+    $request = $client->get('search/suggest');
+    $parameter = new Query($search_string);
+    $request->getQuery()->add($parameter->getKey(), $parameter->getValue());
+
+    $response = $request->send();
+    $xml = new SimpleXMLElement($response->getBody(true), 0, FALSE, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
+
+    return SuggestionsResult::fromXml($xml);
+
+  }
+
 }

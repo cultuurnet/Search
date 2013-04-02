@@ -7,6 +7,14 @@ use \SimpleXMLElement;
 class ActivityStatsExtendedEntity {
 
   /**
+   * Activity count types.
+   */
+  const ACTIVITY_COUNT_COMMENT = 'comment';
+  const ACTIVITY_COUNT_RECOMMEND = 'recommend';
+  const ACTIVITY_COUNT_LIKE = 'like';
+  const ACTIVITY_COUNT_ATTEND = 'attend';
+
+  /**
    * array $activityCounts
    */
   protected $activityCounts;
