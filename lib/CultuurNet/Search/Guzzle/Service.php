@@ -119,7 +119,7 @@ class Service implements ServiceInterface {
     if (!$qFound) {
       // @todo throw an exception because the only mandatory parameter is not present
     }
-
+dsm($request->getUrl());
     $response = $request->send();
     $xml = new SimpleXMLElement($response->getBody(true), 0, FALSE, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
 

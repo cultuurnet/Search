@@ -3,8 +3,9 @@
 namespace CultuurNet\Search\Parameter\Spatial;
 
 use \CultuurNet\Search\Parameter\ParameterInterface;
+use \CultuurNet\Search\Parameter\AbstractParameter;
 
-class Point implements ParameterInterface
+class Point extends AbstractParameter implements ParameterInterface
 {
     /**
      * @var float

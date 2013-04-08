@@ -11,6 +11,12 @@ class FacetResultItem {
   protected $label;
 
   /**
+   * Value from the item.
+   * @var string
+   */
+  protected $value;
+
+  /**
    * Total results for this item.
    * @var int
    */
@@ -27,6 +33,7 @@ class FacetResultItem {
    */
   public function __construct($label, $totalResults) {
     $this->label = $label;
+    $this->value = $label;
     $this->totalResults = $totalResults;
   }
 
@@ -53,6 +60,13 @@ class FacetResultItem {
   }
 
   /**
+   * Get the value for this item.
+   */
+  public function getValue() {
+    return $this->value;
+  }
+
+  /**
    * Get the total results for this item.
    */
   public function getTotalResults() {
@@ -64,6 +78,13 @@ class FacetResultItem {
    */
   public function getSubItems() {
     return $this->subItems;
+  }
+
+  /**
+   * Set the label for this facet item.
+   */
+  public function setLabel($label) {
+    $this->label = $label;
   }
 
 }
