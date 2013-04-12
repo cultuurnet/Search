@@ -1,4 +1,8 @@
 {
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
     "hash": "6e01e3b764b7352b21e35c97170de50b",
     "packages": [
         {
@@ -7,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cultuurnet/Auth.git",
-                "reference": "75a034f3504bd013f28ee5e3a814f11c712537ee"
+                "reference": "0b42c396b97d545e93ff0f1b6c86205e22192d4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cultuurnet/Auth/zipball/75a034f3504bd013f28ee5e3a814f11c712537ee",
-                "reference": "75a034f3504bd013f28ee5e3a814f11c712537ee",
+                "url": "https://api.github.com/repos/cultuurnet/Auth/zipball/0b42c396b97d545e93ff0f1b6c86205e22192d4e",
+                "reference": "0b42c396b97d545e93ff0f1b6c86205e22192d4e",
                 "shasum": ""
             },
             "require": {
@@ -39,12 +43,12 @@
                     ]
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "Apache-2.0"
             ],
             "description": "Authentication service for CultuurNet web services",
-            "time": "2013-03-17 11:07:57"
+            "time": "2013-04-12 20:53:33"
         },
         {
             "name": "cultuurnet/cdb",
@@ -52,12 +56,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cultuurnet/Cdb.git",
-                "reference": "dec378511e957f3429244dabc54f0d04ab318439"
+                "reference": "4168bb226b9b814083765b60de5746c903f3d461"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cultuurnet/Cdb/zipball/dec378511e957f3429244dabc54f0d04ab318439",
-                "reference": "dec378511e957f3429244dabc54f0d04ab318439",
+                "url": "https://api.github.com/repos/cultuurnet/Cdb/zipball/4168bb226b9b814083765b60de5746c903f3d461",
+                "reference": "4168bb226b9b814083765b60de5746c903f3d461",
                 "shasum": ""
             },
             "type": "library",
@@ -73,12 +77,12 @@
                     ]
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "Apache-2.0"
             ],
             "description": "PHP library for hydrating/manipulating CultuurNet's Cdb XML documents",
-            "time": "2013-03-26 11:02:43"
+            "time": "2013-04-12 15:35:33"
         },
         {
             "name": "guzzle/common",
@@ -110,7 +114,7 @@
                     "Guzzle\\Common": ""
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -159,7 +163,7 @@
                     "Guzzle\\Http": ""
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -210,7 +214,7 @@
                     "Guzzle\\Parser": ""
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -255,7 +259,7 @@
                     "Guzzle\\Plugin\\Cookie": ""
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -304,7 +308,7 @@
                     "Guzzle\\Plugin\\Oauth": ""
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -354,7 +358,7 @@
                     "Guzzle\\Stream": ""
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -384,7 +388,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/justinrainbow/json-schema/archive/v1.1.0.zip",
+                "url": "https://github.com/justinrainbow/json-schema/zipball/v1.1.0",
                 "reference": "v1.1.0",
                 "shasum": ""
             },
@@ -397,7 +401,7 @@
                     "JsonSchema": "src/"
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "NewBSD"
             ],
@@ -427,7 +431,7 @@
                 "json",
                 "schema"
             ],
-            "time": "2012-01-03 00:33:17"
+            "time": "2012-01-02 16:33:17"
         },
         {
             "name": "symfony/console",
@@ -436,12 +440,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "d146fc32a9cf13bc479820e515048298a34cd432"
+                "reference": "a4aeb9fa57cb4e69310311cd2ddb82bc12d2112d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/d146fc32a9cf13bc479820e515048298a34cd432",
-                "reference": "d146fc32a9cf13bc479820e515048298a34cd432",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/a4aeb9fa57cb4e69310311cd2ddb82bc12d2112d",
+                "reference": "a4aeb9fa57cb4e69310311cd2ddb82bc12d2112d",
                 "shasum": ""
             },
             "require": {
@@ -458,7 +462,7 @@
                     "Symfony\\Component\\Console\\": ""
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -474,21 +478,21 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2013-03-19 20:48:08"
+            "time": "2013-04-12 13:15:07"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.2.0",
+            "version": "v2.2.1",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "v2.2.0-RC3"
+                "reference": "v2.2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/v2.2.0-RC3",
-                "reference": "v2.2.0-RC3",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/v2.2.1",
+                "reference": "v2.2.1",
                 "shasum": ""
             },
             "require": {
@@ -512,7 +516,7 @@
                     "Symfony\\Component\\EventDispatcher\\": ""
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -531,7 +535,9 @@
             "time": "2013-02-11 11:26:43"
         }
     ],
-    "packages-dev": null,
+    "packages-dev": [
+
+    ],
     "aliases": [
 
     ],
@@ -540,5 +546,11 @@
         "cultuurnet/auth": 20,
         "cultuurnet/cdb": 20,
         "symfony/console": 20
-    }
+    },
+    "platform": {
+        "php": ">=5.3.0"
+    },
+    "platform-dev": [
+
+    ]
 }
