@@ -18,7 +18,6 @@ use \Guzzle\Plugin\Oauth\OauthPlugin;
 use \Guzzle\Http\Url;
 
 use \SimpleXMLElement;
-use \DOMDocument;
 
 class Service implements ServiceInterface {
 
@@ -83,12 +82,12 @@ class Service implements ServiceInterface {
 
   /**
    * Execute a search call to the service.
-   * @param array $searchParameters
-   * @todo maybe $parameters should be a typed object, like a ParameterBag or something,
-   * by doing this we can ensure any items inside implement the ParameterInterface
+   * @param array $parameters
+   *   Parameters to be used in the request.
    * @return SearchResult
    */
   public function search($parameters = array()) {
+
     $client = $this->getClient();
 
     $request = $client->get('search');
@@ -119,13 +118,14 @@ class Service implements ServiceInterface {
     if (!$qFound) {
       // @todo throw an exception because the only mandatory parameter is not present
     }
-dsm($request->getUrl());
+
     $response = $request->send();
     $xml = new SimpleXMLElement($response->getBody(true), 0, FALSE, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
 
     return SearchResult::fromXml($xml);
 
   }
+
 
   /**
    * Get a list of suggestions from the given search string.

@@ -17,7 +17,7 @@ class SearchResult {
   protected $items = array();
 
   /**
-   * @var \SimpleXMLElement
+   * @var string
    */
   protected $xml;
 
@@ -49,7 +49,8 @@ class SearchResult {
     $result = new static();
 
     $result->total = intval($xmlElement->nofrecords);
-    $result->xml = $xmlElement;
+    // Store string version of xml, so the result object can be cached.
+    $result->xml = $xmlElement->asXML();
 
     foreach ($xmlElement as $xmlItem) {
       $entity = ActivityStatsExtendedEntity::fromXml($xmlItem);
@@ -63,7 +64,7 @@ class SearchResult {
   }
 
   /**
-   * @return \SimpleXMLElement
+   * @return string
    */
   public function getXml() {
     return $this->xml;

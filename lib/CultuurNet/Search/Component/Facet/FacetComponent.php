@@ -4,6 +4,7 @@ namespace CultuurNet\Search\Component\Facet;
 
 use \CultuurNet\Search\Parameter\FacetField;
 use \CultuurNet\Search\SearchResult;
+use \SimpleXMLElement;
 
 class FacetComponent {
 
@@ -32,7 +33,7 @@ class FacetComponent {
 
   public function obtainResults(SearchResult $result) {
 
-    $xml = $result->getXml();
+    $xml = new SimpleXMLElement($result->getXml(), 0, FALSE, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
 
     if (!empty($xml->facets)) {
       foreach ($xml->facets->facet as $facetElement) {
