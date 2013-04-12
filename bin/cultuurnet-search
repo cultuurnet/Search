@@ -4,6 +4,7 @@
 use Symfony\Component\Console\Application;
 use CultuurNet\Auth\Command\AuthenticateCommand;
 use CultuurNet\Search\Command\SearchCommand;
+use CultuurNet\Search\Command\SuggestCommand;
 
 require 'vendor/autoload.php';
 
@@ -11,5 +12,6 @@ $app = new Application();
 
 $app->add(new AuthenticateCommand());
 $app->add(new SearchCommand());
+$app->add(new SuggestCommand());
 
 $app->run();
