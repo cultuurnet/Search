@@ -2,6 +2,8 @@
 
 namespace CultuurNet\Search\Guzzle;
 
+use CultuurNet\Search\Parameter\Type;
+
 use \CultuurNet\Auth\ConsumerCredentials;
 use \CultuurNet\Auth\TokenCredentials;
 use \CultuurNet\Search\ServiceInterface;
@@ -87,10 +89,35 @@ class Service implements ServiceInterface {
    * @return SearchResult
    */
   public function search($parameters = array()) {
+    $response = $this->executeSearch('search', $parameters);
+    return SearchResult::fromXml(new SimpleXMLElement($response->getBody(true), 0, FALSE, \CultureFeed_Cdb_Default::CDB_SCHEME_URL));
+  }
+
+  /**
+   * Execute a pages search call to the service.
+   * @param array $parameters
+   *   Parameters to be used in the request.
+   * @return SearchResult
+   */
+  public function searchPages($parameters = array()) {
+    $response = $this->executeSearch('search/page', $parameters);
+    return SearchResult::fromPagesXml(new SimpleXMLElement($response->getBody(true)));
+  }
+
+  /**
+   * Perform a search call to the service
+   * @param $path
+   *   Path to call
+   * @param array $parameters
+   *   Parameters to be used in the request.
+   * @return SimpleXMLElement
+   *   Xml returned from the call.
+   */
+  private function executeSearch($path, $parameters) {
 
     $client = $this->getClient();
 
-    $request = $client->get('search');
+    $request = $client->get($path);
     $request->getQuery()->setAggregateFunction(array('\Guzzle\Http\QueryString', 'aggregateUsingDuplicates'));
 
     $qFound = FALSE;
@@ -119,10 +146,7 @@ class Service implements ServiceInterface {
       // @todo throw an exception because the only mandatory parameter is not present
     }
 
-    $response = $request->send();
-    $xml = new SimpleXMLElement($response->getBody(true), 0, FALSE, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
-
-    return SearchResult::fromXml($xml);
+    return $request->send();
 
   }
 
@@ -131,13 +155,20 @@ class Service implements ServiceInterface {
    * Get a list of suggestions from the given search string.
    * @param string $search
    *   String to get suggestions for.
+   * @param string $type
+   *   Type to search for. Example page.
    */
-  public function searchSuggestions($search_string) {
+  public function searchSuggestions($search_string, $type = NULL) {
 
     $client = $this->getClient();
-    $request = $client->get('search/suggest');
+    $request = $client->get($search_path = empty($type) ? 'search/suggest' : 'search/suggest/item');
     $parameter = new Query($search_string);
     $request->getQuery()->add($parameter->getKey(), $parameter->getValue());
+
+    if (!empty($type)) {
+      $parameter = new Type($type);
+      $request->getQuery()->add($parameter->getKey(), $parameter->getValue());
+    }
 
     $response = $request->send();
     $xml = new SimpleXMLElement($response->getBody(true), 0, FALSE, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);

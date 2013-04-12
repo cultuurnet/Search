@@ -58,6 +58,7 @@ class ActivityStatsExtendedEntity {
   }
 
   /**
+   * Create an extended entity based on a given xmlElement.
    * @param SimpleXMLElement $xmlElement
    */
   public static function fromXml(SimpleXMLElement $xmlElement) {
@@ -83,4 +84,37 @@ class ActivityStatsExtendedEntity {
     return $extendedEntity;
 
   }
+
+  /**
+   * Create an extended entity based on a given xmlElement.
+   * @param \SimpleXMLElement $xmlElement
+   *   Pages search xml element.
+   */
+  public static function fromPagesXml(\SimpleXMLElement $xmlElement) {
+
+    $attributes = $xmlElement->attributes();
+
+    $type = (string) $attributes['type'];
+    if ($type != 'page') {
+      return NULL;
+    }
+
+    $cdbItem = \CultureFeed_Cdb_Item_Page::parseFromCdbXml($xmlElement->page);
+    $extendedEntity = new static();
+    $extendedEntity->type = (string) $attributes['type'];
+
+    // Add the different activity counts.
+    if (!empty($xmlElement->activity)) {
+      foreach ($xmlElement>activity as $activity) {
+        $activityType = (string) $activity->attributes()->type;
+        $extendedEntity->activityCounts[$activityType] = (int) $activity->attributes()->count;
+      }
+    }
+
+    $extendedEntity->entity = $cdbItem;
+
+    return $extendedEntity;
+
+  }
+
 }

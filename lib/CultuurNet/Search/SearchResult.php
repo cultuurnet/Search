@@ -64,6 +64,30 @@ class SearchResult {
   }
 
   /**
+   * Construct the search result based on the given result xml for pages.
+   * @param SimpleXMLElement $xmlElement
+   * @return \CultuurNet\Search\SearchResult
+   */
+  public static function fromPagesXml(SimpleXMLElement $xmlElement) {
+
+    $result = new static();
+
+    $result->total = intval($xmlElement->total);
+    // Store string version of xml, so the result object can be cached.
+    $result->xml = $xmlElement->asXML();
+
+    foreach ($xmlElement->items->item as $xmlItem) {
+      $entity = ActivityStatsExtendedEntity::fromPagesXml($xmlItem);
+      if ($entity) {
+        $result->items[] = $entity;
+      }
+    }
+
+    return $result;
+
+  }
+
+  /**
    * @return string
    */
   public function getXml() {
