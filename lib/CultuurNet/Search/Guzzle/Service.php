@@ -2,85 +2,20 @@
 
 namespace CultuurNet\Search\Guzzle;
 
-use CultuurNet\Search\Parameter\Type;
+use \CultuurNet\Auth\Guzzle\OAuthProtectedService;
 
-use \CultuurNet\Auth\ConsumerCredentials;
-use \CultuurNet\Auth\TokenCredentials;
 use \CultuurNet\Search\ServiceInterface;
 use \CultuurNet\Search\SearchResult;
 use \CultuurNet\Search\SuggestionsResult;
 
 use \CultuurNet\Search\Parameter\Query;
 use \CultuurNet\Search\Parameter\QueryParameterInterface;
+use \CultuurNet\Search\Parameter\Type;
 use \CultuurNet\Search\Parameter\LocalParameterSerializer;
-
-use \Guzzle\Http\Client;
-use \Guzzle\Plugin\Oauth\OauthPlugin;
-
-use \Guzzle\Http\Url;
 
 use \SimpleXMLElement;
 
-class Service implements ServiceInterface {
-
-  /**
-   * @var string
-   */
-  protected $endpoint;
-
-  /**
-   * @var \CultuurNet\Auth\ConsumerCredentials
-   */
-  protected $consumerCredentials;
-
-  /**
-   * @var \CultuurNet\Auth\TokenCredentials
-   */
-  protected $tokenCredentials;
-
-  /**
-   * @var \Guzzle\Http\Client;
-   */
-  protected $client;
-
-  /**
-   * @param string $endpoint
-   * @param \CultuurNet\Auth\ConsumerCredentials $consumerCredentials
-   * @param \CultuurNet\Auth\TokenCredentials $tokenCredentials
-   */
-  public function __construct($endpoint, ConsumerCredentials $consumerCredentials, TokenCredentials $tokenCredentials = null) {
-    // @todo check type of endpoint
-    $this->consumerCredentials = $consumerCredentials;
-    $this->tokenCredentials = $tokenCredentials;
-    $this->client = null;
-    $this->endpoint = $endpoint;
-  }
-
-  /**
-   * @return \Guzzle\Http\Client
-   */
-  protected function getClient() {
-    if (null === $this->client) {
-      $this->client = new Client($this->endpoint);
-
-      $config = array(
-        'consumer_key' => $this->consumerCredentials->getKey(),
-        'consumer_secret' => $this->consumerCredentials->getSecret(),
-      );
-
-      if (null !== $this->tokenCredentials) {
-        $config += array(
-          'token' => $this->tokenCredentials->getToken(),
-          'token_secret' => $this->tokenCredentials->getSecret(),
-        );
-      }
-
-      $oAuthPlugin = new OauthPlugin($config);
-      $this->client->addSubscriber($oAuthPlugin);
-    }
-
-    return $this->client;
-  }
+class Service extends OAuthProtectedService implements ServiceInterface {
 
   /**
    * Execute a search call to the service.
@@ -90,7 +25,7 @@ class Service implements ServiceInterface {
    */
   public function search($parameters = array()) {
     $response = $this->executeSearch('search', $parameters);
-    return SearchResult::fromXml(new SimpleXMLElement($response->getBody(true), 0, FALSE, \CultureFeed_Cdb_Default::CDB_SCHEME_URL));
+    return SearchResult::fromXml(new SimpleXMLElement($response->getBody(true), 0, false, \CultureFeed_Cdb_Default::CDB_SCHEME_URL));
   }
 
   /**
@@ -120,12 +55,12 @@ class Service implements ServiceInterface {
     $request = $client->get($path);
     $request->getQuery()->setAggregateFunction(array('\Guzzle\Http\QueryString', 'aggregateUsingDuplicates'));
 
-    $qFound = FALSE;
+    $qFound = false;
 
     foreach ($parameters as $parameter) {
 
       if ('q' == $parameter->getKey()) {
-        $qFound = TRUE;
+        $qFound = true;
       }
 
       $value = '';
@@ -158,7 +93,7 @@ class Service implements ServiceInterface {
    * @param string $type
    *   Type to search for. Example page.
    */
-  public function searchSuggestions($search_string, $type = NULL) {
+  public function searchSuggestions($search_string, $type = null) {
 
     $client = $this->getClient();
     $request = $client->get($search_path = empty($type) ? 'search/suggest' : 'search/suggest/item');
@@ -171,7 +106,7 @@ class Service implements ServiceInterface {
     }
 
     $response = $request->send();
-    $xml = new SimpleXMLElement($response->getBody(true), 0, FALSE, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
+    $xml = new SimpleXMLElement($response->getBody(true), 0, false, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
 
     return SuggestionsResult::fromXml($xml);
 
