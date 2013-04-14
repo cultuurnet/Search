@@ -118,7 +118,11 @@ class SearchCommand extends Command {
     $sorts = $in->getOption('sort');
     foreach ($sorts as $sort) {
       // @todo validate the given sort option
-      list($field, $direction) = explode(' ', $sort);
+      $sort_args = explode(' ', $sort);
+      if (count($sort_args) < 2) {
+          $sort_args[] = 'asc';
+      }
+      list($field, $direction) = $sort_args;
       $parameters[] = new Parameter\Sort($field, $direction);
     }
 
