@@ -13,6 +13,9 @@ class ActivityStatsExtendedEntity {
   const ACTIVITY_COUNT_RECOMMEND = 'recommend';
   const ACTIVITY_COUNT_LIKE = 'like';
   const ACTIVITY_COUNT_ATTEND = 'attend';
+  const ACTIVITY_COUNT_PAGE_ADMIN = 'pageadmin';
+  const ACTIVITY_COUNT_PAGE_MEMBER = 'pagemember';
+  const ACTIVITY_COUNT_PAGE_FOLLOW = 'pagefollow';
 
   /**
    * array $activityCounts
@@ -104,8 +107,8 @@ class ActivityStatsExtendedEntity {
     $extendedEntity->type = (string) $attributes['type'];
 
     // Add the different activity counts.
-    if (!empty($xmlElement->activity)) {
-      foreach ($xmlElement>activity as $activity) {
+    if (isset($xmlElement->activity)) {
+      foreach ($xmlElement->activity as $activity) {
         $activityType = (string) $activity->attributes()->type;
         $extendedEntity->activityCounts[$activityType] = (int) $activity->attributes()->count;
       }
