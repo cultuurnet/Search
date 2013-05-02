@@ -2,6 +2,8 @@
 
 namespace CultuurNet\Search;
 
+use Symfony\Component\Console\Input\StringInput;
+
 use \SimpleXMLElement;
 
 class ActivityStatsExtendedEntity {
@@ -28,6 +30,11 @@ class ActivityStatsExtendedEntity {
    * @var string
    */
   protected $type;
+  
+  /**
+   * @var String
+   */
+  protected $id;
 
   /**
    * @param string $activityType
@@ -36,7 +43,8 @@ class ActivityStatsExtendedEntity {
     // @todo check type of $activityType
 
     if (!isset($this->activityCounts[$activityType])) {
-      // @todo throw exception
+      // No activity set for type in $activityType.
+      return NULL;
     }
 
     return $this->activityCounts[$activityType];
@@ -48,6 +56,26 @@ class ActivityStatsExtendedEntity {
    */
   public function getEntity() {
     return $this->entity;
+  }
+
+  /**
+   * Get the unique identifier of element.
+   */
+  public function getId() {
+    return $this->id;
+  }
+
+  /**
+   * Get the title of element.
+   * 
+   * @param String $langcode 
+   */
+  public function getTitle($langcode) {
+    $detail = $this->getEntity()->getDetails()->getDetailByLanguage($langcode);
+    if ($detail) {
+      return $detail->getTitle();
+    }
+    return '';
   }
 
   /**
@@ -70,6 +98,7 @@ class ActivityStatsExtendedEntity {
 
     $extendedEntity = new static();
     $extendedEntity->type = $xmlElement->getName();
+    $extendedEntity->id = $cdbItem->getCdbId();
 
     // Add the different activity counts.
     if (!empty($xmlElement->activities)) {
@@ -102,6 +131,7 @@ class ActivityStatsExtendedEntity {
     $cdbItem = \CultureFeed_Cdb_Item_Page::parseFromCdbXml($xmlElement->page);
     $extendedEntity = new static();
     $extendedEntity->type = (string) $attributes['type'];
+    $extendedEntity->id = $cdbItem->getId();
 
     // Add the different activity counts.
     if (!empty($xmlElement->activity)) {
