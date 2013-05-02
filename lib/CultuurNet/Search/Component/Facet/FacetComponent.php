@@ -31,9 +31,9 @@ class FacetComponent {
     return $this->facets;
   }
 
-  public function obtainResults(SearchResult $result) {
+  public function obtainResults(SearchResult $result, $xml_ns) {
 
-    $xml = new SimpleXMLElement($result->getXml(), 0, FALSE, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
+    $xml = new SimpleXMLElement($result->getXml(), 0, FALSE, $xml_ns);
 
     if (!empty($xml->facets)) {
       foreach ($xml->facets->facet as $facetElement) {
