@@ -33,7 +33,7 @@ class ActivityStatsExtendedEntity {
    * @var string
    */
   protected $type;
-  
+
   /**
    * @var String
    */
@@ -70,10 +70,16 @@ class ActivityStatsExtendedEntity {
 
   /**
    * Get the title of element.
-   * 
-   * @param String $langcode 
+   *
+   * @param String $langcode
    */
   public function getTitle($langcode) {
+
+    // Page is a special case.
+    if ($this->getType() == 'page') {
+      return $this->getEntity()->getName();
+    }
+
     $detail = $this->getEntity()->getDetails()->getDetailByLanguage($langcode);
     if ($detail) {
       return $detail->getTitle();
