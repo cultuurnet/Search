@@ -11,6 +11,7 @@ use \CultuurNet\Search\SuggestionsResult;
 use \CultuurNet\Search\Parameter\Query;
 use \CultuurNet\Search\Parameter\QueryParameterInterface;
 use \CultuurNet\Search\Parameter\Type;
+use \CultuurNet\Search\Parameter\Title;
 use \CultuurNet\Search\Parameter\LocalParameterSerializer;
 
 use \SimpleXMLElement;
@@ -97,15 +98,20 @@ class Service extends OAuthProtectedService implements ServiceInterface {
 
     $client = $this->getClient();
     $request = $client->get($search_path = empty($type) ? 'search/suggest' : 'search/suggest/item');
-    $parameter = new Query($search_string);
-    $request->getQuery()->add($parameter->getKey(), $parameter->getValue());
 
     if (!empty($type)) {
       $parameter = new Type($type);
       $request->getQuery()->add($parameter->getKey(), $parameter->getValue());
+      $parameter = new Title($search_string);
+      $request->getQuery()->add($parameter->getKey(), $parameter->getValue());
+    }
+    else {
+      $parameter = new Query($search_string);
+      $request->getQuery()->add($parameter->getKey(), $parameter->getValue());
     }
 
     $response = $request->send();
+    dsm($request->getUrl());
     $xml = new SimpleXMLElement($response->getBody(true), 0, false, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
 
     return SuggestionsResult::fromXml($xml);
