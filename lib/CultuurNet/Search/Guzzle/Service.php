@@ -18,6 +18,16 @@ use \SimpleXMLElement;
 
 class Service extends OAuthProtectedService implements ServiceInterface {
 
+  protected $debugMode = FALSE;
+
+  /**
+   * Set the debug mode.
+   * @param bool $mode
+   */
+  public function setDebugMode($mode) {
+    $this->debugMode = $mode;
+  }
+
   /**
    * Execute a search call to the service.
    * @param array $parameters
@@ -80,6 +90,10 @@ class Service extends OAuthProtectedService implements ServiceInterface {
 
     if (!$qFound) {
       // @todo throw an exception because the only mandatory parameter is not present
+    }
+
+    if ($this->debugMode) {
+      print $request->getUrl();
     }
 
     return $request->send();
