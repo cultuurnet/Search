@@ -12,11 +12,6 @@ class SuggestionsResult {
   protected $suggestions = array();
 
   /**
-   * @var \SimpleXMLElement
-   */
-  protected $xml;
-
-  /**
    * @return ActivityStatsExtendedEntity[]
    */
   public function getSuggestions() {
@@ -39,7 +34,6 @@ class SuggestionsResult {
   public static function fromXml(SimpleXMLElement $xmlElement) {
 
     $result = new static();
-    $result->xml = $xmlElement;
 
     foreach ($xmlElement->xpath('//suggestion') as $xmlSuggestion) {
       $result->suggestions[] = (string)$xmlSuggestion;
@@ -49,10 +43,4 @@ class SuggestionsResult {
 
   }
 
-  /**
-   * @return \SimpleXMLElement
-   */
-  public function getXml() {
-    return $this->xml;
-  }
 }

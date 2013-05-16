@@ -84,7 +84,6 @@ class Service extends OAuthProtectedService implements ServiceInterface {
       }
 
       $value .= $parameter->getValue();
-
       $request->getQuery()->add($parameter->getKey(), $value);
     }
 
