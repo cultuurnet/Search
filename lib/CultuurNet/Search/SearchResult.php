@@ -22,6 +22,11 @@ class SearchResult {
   protected $xml;
 
   /**
+   * @var SimpleXMLElement
+   */
+  protected $xmlElement;
+
+  /**
    * @return ActivityStatsExtendedEntity[]
    */
   public function getItems() {
@@ -40,6 +45,20 @@ class SearchResult {
   }
 
   /**
+   * @return SimpleXMLElement
+   */
+  public function getXmlElement() {
+    return $this->xmlElement;
+  }
+
+  /**
+   * Set the xml element.
+   */
+  public function setXmlElement($element) {
+    $this->xmlElement = $element;
+  }
+
+  /**
    * Construct the search result based on the given result xml.
    * @param SimpleXMLElement $xmlElement
    * @return \CultuurNet\Search\SearchResult
@@ -49,6 +68,10 @@ class SearchResult {
     $result = new static();
 
     $result->total = intval($xmlElement->nofrecords);
+
+    // Store
+    $result->xmlElement = $xmlElement;
+
     // Store string version of xml, so the result object can be cached.
     $result->xml = $xmlElement->asXML();
 

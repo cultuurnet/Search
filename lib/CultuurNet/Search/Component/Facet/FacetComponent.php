@@ -31,12 +31,12 @@ class FacetComponent {
     return $this->facets;
   }
 
-  public function obtainResults(SearchResult $result, $xml_ns) {
+  public function obtainResults(SearchResult $result) {
 
-    $xml = new SimpleXMLElement($result->getXml(), 0, FALSE, $xml_ns);
+    $xmlElement = $result->getXmlElement();
 
-    if (!empty($xml->facets)) {
-      foreach ($xml->facets->facet as $facetElement) {
+    if (!empty($xmlElement->facets)) {
+      foreach ($xmlElement->facets->facet as $facetElement) {
 
         $facetAttributes = $facetElement->attributes();
         $field = (string) $facetAttributes['field'];
@@ -47,7 +47,7 @@ class FacetComponent {
         if ($field == 'category') {
           $field = 'category_' . $facetAttributes['domain'] . '_name';
           if (!isset($this->facets[$field])) {
-            $this->facets[$field] = new Facet($field, new FacetField($field));;
+            $this->facets[$field] = new Facet($field, new FacetField($field));
           }
         }
 

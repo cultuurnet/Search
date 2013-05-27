@@ -126,9 +126,9 @@ class Service extends OAuthProtectedService implements ServiceInterface {
 
     $response = $request->send();
 
-    $xml = new SimpleXMLElement($response->getBody(true), 0, false, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
+    $xmlElement = new SimpleXMLElement($response->getBody(true), 0, false, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
 
-    return SuggestionsResult::fromXml($xml);
+    return SuggestionsResult::fromXml($xmlElement);
 
   }
 
