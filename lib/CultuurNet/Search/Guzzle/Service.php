@@ -92,7 +92,8 @@ class Service extends OAuthProtectedService implements ServiceInterface {
     }
 
     if ($this->debugMode) {
-      print $request->getUrl();
+      print "<h3>query to api</h3>";
+      print "<pre>".print_r(urldecode($request->getUrl()), TRUE)."</pre>";
     }
 
     return $request->send();
