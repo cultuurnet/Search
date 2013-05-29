@@ -69,7 +69,7 @@ class SearchResult {
 
     $result->total = intval($xmlElement->nofrecords);
 
-    // Store
+    // Store parsed version. Set this to NULL before you cache it.
     $result->xmlElement = $xmlElement;
 
     // Store string version of xml, so the result object can be cached.
@@ -96,6 +96,10 @@ class SearchResult {
     $result = new static();
 
     $result->total = intval($xmlElement->total);
+
+    // Store parsed version. Set this to NULL before you cache it.
+    $result->xmlElement = $xmlElement;
+
     // Store string version of xml, so the result object can be cached.
     $result->xml = $xmlElement->asXML();
 

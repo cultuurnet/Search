@@ -18,6 +18,7 @@ class ActivityStatsExtendedEntity {
   const ACTIVITY_COUNT_PAGE_ADMIN = 'pageadmin';
   const ACTIVITY_COUNT_PAGE_MEMBER = 'pagemember';
   const ACTIVITY_COUNT_PAGE_FOLLOW = 'pagefollow';
+  const ACTIVITY_COUNT_FACEBOOK_SHARE = 'facebook_share';
 
   /**
    * array $activityCounts
