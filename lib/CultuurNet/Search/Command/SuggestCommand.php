@@ -51,9 +51,9 @@ class SuggestCommand extends Command {
         );
 
         $query = $in->getArgument('query');
-        $type = $in->getOption('type');
+        $types = $in->getOption('type');
 
-        $suggestionsResult = $service->searchSuggestions($query, $type);
+        $suggestionsResult = $service->searchSuggestions($query, $types);
 
         $suggestions = $suggestionsResult->getSuggestions();
 

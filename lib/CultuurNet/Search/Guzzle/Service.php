@@ -105,19 +105,24 @@ class Service extends OAuthProtectedService implements ServiceInterface {
    * Get a list of suggestions from the given search string.
    * @param string $search
    *   String to get suggestions for.
-   * @param string $type
-   *   Type to search for. Example page.
+   * @param array $types
+   *   Types to search for. Example page.
    */
-  public function searchSuggestions($search_string, $type = null) {
+  public function searchSuggestions($search_string, $types = null) {
 
     $client = $this->getClient();
     $request = $client->get($search_path = empty($type) ? 'search/suggest' : 'search/suggest/item');
 
-    if (!empty($type)) {
-      $parameter = new Type($type);
-      $request->getQuery()->add($parameter->getKey(), $parameter->getValue());
+    if (!empty($types)) {
+
+      foreach ($types as $type) {
+        $parameter = new Type($type);
+        $request->getQuery()->add($parameter->getKey(), $parameter->getValue());
+      }
+
       $parameter = new Title($search_string);
       $request->getQuery()->add($parameter->getKey(), $parameter->getValue());
+
     }
     else {
       $parameter = new Query($search_string);
