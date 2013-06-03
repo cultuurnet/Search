@@ -111,7 +111,8 @@ class Service extends OAuthProtectedService implements ServiceInterface {
   public function searchSuggestions($search_string, $types = null) {
 
     $client = $this->getClient();
-    $request = $client->get($search_path = empty($type) ? 'search/suggest' : 'search/suggest/item');
+    $request = $client->get($search_path = empty($types) ? 'search/suggest' : 'search/suggest/item');
+    $request->getQuery()->setAggregateFunction(array('\Guzzle\Http\QueryString', 'aggregateUsingDuplicates'));
 
     if (!empty($types)) {
 
