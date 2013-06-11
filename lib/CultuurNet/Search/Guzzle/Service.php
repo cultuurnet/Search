@@ -15,6 +15,7 @@ use \CultuurNet\Search\Parameter\Title;
 use \CultuurNet\Search\Parameter\LocalParameterSerializer;
 
 use \SimpleXMLElement;
+use CultuurNet\Search\QueryLog;
 
 class Service extends OAuthProtectedService implements ServiceInterface {
 
@@ -92,8 +93,7 @@ class Service extends OAuthProtectedService implements ServiceInterface {
     }
 
     if ($this->debugMode) {
-      print "<h3>query to api</h3>";
-      print "<pre>".print_r(urldecode($request->getUrl()), TRUE)."</pre>";
+      \CultuurNet\Search\QueryLog::getInstance()->add(urldecode($request->getUrl()));
     }
 
     return $request->send();
