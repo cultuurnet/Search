@@ -45,7 +45,7 @@ class FacetComponent {
         // all the results for every possible category facet.
         // Map it to the correct facet.
         if ($field == 'category') {
-          $field = 'category_' . $facetAttributes['domain'] . '_name';
+          $field = 'category_' . $facetAttributes['domain'] . '_id';
           if (!isset($this->facets[$field])) {
             $this->facets[$field] = new Facet($field, new FacetField($field));
           }
@@ -55,13 +55,13 @@ class FacetComponent {
 
           $facet = $this->facets[$field];
 
-          $facetResultItem = new FacetResultItem((string) $facetAttributes['name'], (int) $facetAttributes['total']);
+          $facetResultItem = new FacetResultItem((string) $facetAttributes['name'], (string) $facetAttributes['id'], (int) $facetAttributes['total']);
 
           // Check if this facet has children.
           //if (!empty($facetElement->facet)) {
           foreach ($facetElement->facet as $childFacetElement) {
             $childFacetAttributes = $childFacetElement->attributes();
-            $facetResultItem->addSubItem(new FacetResultItem((string) $childFacetAttributes['name'], (int) $childFacetAttributes['total']));
+            $facetResultItem->addSubItem(new FacetResultItem((string) $childFacetAttributes['name'], (string) $childFacetAttributes['id'], (int) $childFacetAttributes['total']));
           }
 
           $facet->getResult()->addItem($facetResultItem);

@@ -31,9 +31,9 @@ class FacetResultItem {
   /**
    * Construct the result item.
    */
-  public function __construct($label, $totalResults) {
+  public function __construct($label, $value, $totalResults) {
     $this->label = $label;
-    $this->value = $label;
+    $this->value = $value;
     $this->totalResults = $totalResults;
   }
 
