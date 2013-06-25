@@ -15,6 +15,11 @@ class SearchResult {
    * @var ActivityStatsExtendedEntity[]
    */
   protected $items = array();
+  
+  /**
+   * @var String[]
+   */
+  protected $suggestions = array();
 
   /**
    * @var string
@@ -31,6 +36,13 @@ class SearchResult {
    */
   public function getItems() {
     return $this->items;
+  }
+
+  /**
+   * @return String[]
+   */
+  public function getSuggestions() {
+    return $this->suggestions;
   }
 
   public function getCurrentCount() {
@@ -82,6 +94,12 @@ class SearchResult {
       }
     }
 
+    if (!empty($xmlElement->suggestions)) {
+      foreach ($xmlElement->suggestions->suggestion as $suggestionElement) {
+        $result->suggestions[] = (string) $suggestionElement;
+      }
+    }
+
     return $result;
 
   }
@@ -107,6 +125,12 @@ class SearchResult {
       $entity = ActivityStatsExtendedEntity::fromPagesXml($xmlItem);
       if ($entity) {
         $result->items[] = $entity;
+      }
+    }
+
+    if (!empty($xmlElement->suggestions)) {
+      foreach ($xmlElement->suggestions->suggestion as $suggestionElement) {
+        $result->suggestions[] = (string) $suggestionElement;
       }
     }
 
