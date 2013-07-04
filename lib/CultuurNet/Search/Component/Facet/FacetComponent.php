@@ -54,14 +54,15 @@ class FacetComponent {
         if (isset($this->facets[$field])) {
 
           $facet = $this->facets[$field];
-
-          $facetResultItem = new FacetResultItem((string) $facetAttributes['name'], (string) $facetAttributes['id'], (int) $facetAttributes['total']);
+          $value = isset($facetAttributes['id']) ? (string) $facetAttributes['id'] : (string) $facetAttributes['name'];
+          $facetResultItem = new FacetResultItem((string) $facetAttributes['name'], $value, (int) $facetAttributes['total']);
 
           // Check if this facet has children.
           //if (!empty($facetElement->facet)) {
           foreach ($facetElement->facet as $childFacetElement) {
             $childFacetAttributes = $childFacetElement->attributes();
-            $facetResultItem->addSubItem(new FacetResultItem((string) $childFacetAttributes['name'], (string) $childFacetAttributes['id'], (int) $childFacetAttributes['total']));
+            $value = isset($childFacetAttributes['id']) ? (string) $childFacetAttributes['id'] : (string) $childFacetAttributes['name'];
+            $facetResultItem->addSubItem(new FacetResultItem((string) $childFacetAttributes['name'], $value, (int) $childFacetAttributes['total']));
           }
 
           $facet->getResult()->addItem($facetResultItem);
