@@ -12,10 +12,15 @@ class SearchResult {
   protected $total;
 
   /**
+   * @var string
+   */
+  protected $type;
+
+  /**
    * @var ActivityStatsExtendedEntity[]
    */
   protected $items = array();
-  
+
   /**
    * @var String[]
    */
@@ -78,6 +83,7 @@ class SearchResult {
   public static function fromXml(SimpleXMLElement $xmlElement) {
 
     $result = new static();
+		$result->type = 'cdb';
 
     $result->total = intval($xmlElement->nofrecords);
 
@@ -112,6 +118,7 @@ class SearchResult {
   public static function fromPagesXml(SimpleXMLElement $xmlElement) {
 
     $result = new static();
+    $result->type = 'pages';
 
     $result->total = intval($xmlElement->total);
 
@@ -144,4 +151,26 @@ class SearchResult {
   public function getXml() {
     return $this->xml;
   }
+
+  /**
+   * Don't allow the simple xml element to be serialized.
+   */
+  public function __sleep() {
+  	return array('total', 'type', 'items', 'suggestions', 'xml');
+  }
+
+  /**
+   * Restore the simple xml.
+   */
+  public function __wakeup() {
+
+  	$nameSpace = '';
+  	if ($this->type == 'cdb') {
+  		$nameSpace = \CultureFeed_Cdb_Default::CDB_SCHEME_URL;
+  	}
+
+  	$xmlElement = new SimpleXMLElement($this->getXml(), 0, FALSE, $nameSpace);
+  	$this->setXmlElement($xmlElement);
+  }
+
 }
