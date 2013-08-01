@@ -83,7 +83,7 @@ class SuggestionsItem {
    * @return \CultuurNet\Search\SuggestionItem
    */
   public static function fromXml(SimpleXMLElement $xmlElement) {
-    print $xmlElement->asXML();
+    
     $suggestionItem = new static();
 
     $attributes = $xmlElement->attributes();
