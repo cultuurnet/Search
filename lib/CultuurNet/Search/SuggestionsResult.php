@@ -2,20 +2,59 @@
 
 namespace CultuurNet\Search;
 
-use \SimpleXMLElement;
+use SimpleXMLElement;
+use \CultuurNet\Search\SuggestionsItem;
 
-class SuggestionsResult {
+class SuggestionsResult implements \Iterator {
+
+  /**
+   * Current position in the list.
+   * @var int
+   */
+  protected $position = 0;
 
   /**
    * @var array
    */
   protected $suggestions = array();
 
+  public function add(SuggestionsItem $suggestion) {
+    $this->suggestions[] = $suggestion;
+  }
+
   /**
-   * @return ActivityStatsExtendedEntity[]
+   * @see Iterator::rewind()
    */
-  public function getSuggestions() {
-    return $this->suggestions;
+  public function current() {
+    return $this->suggestions[$this->position];
+  }
+
+  /**
+   * @see Iterator::key()
+   */
+  public function key() {
+    return $this->position;
+  }
+
+  /**
+   * @see Iterator::next()
+   */
+  public function next() {
+    ++$this->position;
+  }
+
+  /**
+   * @see Iterator::rewind()
+   */
+  public function rewind() {
+    $this->position = 0;
+  }
+
+  /**
+   * @see Iterator::valid()
+   */
+  public function valid() {
+    return isset($this->suggestions[$this->position]);
   }
 
   /**
@@ -36,7 +75,7 @@ class SuggestionsResult {
     $result = new static();
 
     foreach ($xmlElement->xpath('//suggestion') as $xmlSuggestion) {
-      $result->suggestions[] = (string)$xmlSuggestion;
+      $result->add(SuggestionsItem::fromXml($xmlSuggestion));
     }
 
     return $result;
