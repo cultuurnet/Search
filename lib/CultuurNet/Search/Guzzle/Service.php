@@ -19,16 +19,6 @@ use CultuurNet\Search\QueryLog;
 
 class Service extends OAuthProtectedService implements ServiceInterface {
 
-  protected $debugMode = FALSE;
-
-  /**
-   * Set the debug mode.
-   * @param bool $mode
-   */
-  public function setDebugMode($mode) {
-    $this->debugMode = $mode;
-  }
-
   /**
    * Execute a search call to the service.
    * @param array $parameters
@@ -92,12 +82,9 @@ class Service extends OAuthProtectedService implements ServiceInterface {
       // @todo throw an exception because the only mandatory parameter is not present
     }
 
-    if ($this->debugMode) {
-      \CultuurNet\Search\QueryLog::getInstance()->add(urldecode($request->getUrl()));
-    }
+    $result = $request->send();
 
-    return $request->send();
-
+    return $result;
   }
 
 
@@ -128,10 +115,6 @@ class Service extends OAuthProtectedService implements ServiceInterface {
     else {
       $parameter = new Query($search_string);
       $request->getQuery()->add($parameter->getKey(), $parameter->getValue());
-    }
-
-    if ($this->debugMode) {
-      \CultuurNet\Search\QueryLog::getInstance()->add(urldecode($request->getUrl()));
     }
 
     $response = $request->send();

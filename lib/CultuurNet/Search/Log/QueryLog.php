@@ -1,6 +1,6 @@
 <?php
 
-namespace CultuurNet\Search;
+namespace CultuurNet\Search\Log;
 
 class QueryLog {
 
@@ -35,7 +35,7 @@ class QueryLog {
     return count($this->queries);
   }
 
-  public function add($query) {
+  public function add(SearchQuery $query) {
     $this->queries[] = $query;
   }
 
@@ -46,7 +46,7 @@ class QueryLog {
     if ($this->getQueryCount() > 0) {
       $output .= '<pre>';
       foreach ($this->queries as $query) {
-        $output .= $query . '<br/>';
+        $output .= $query->getUrl() . '<br/>';
       }
       $output .= '</pre>';
     }
