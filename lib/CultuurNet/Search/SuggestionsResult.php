@@ -73,7 +73,6 @@ class SuggestionsResult implements \Iterator {
   public static function fromXml(SimpleXMLElement $xmlElement) {
 
     $result = new static();
-    dsm($xmlElement->asXML());
     foreach ($xmlElement->xpath('//suggestion') as $xmlSuggestion) {
       $result->add(SuggestionsItem::fromXml($xmlSuggestion));
     }

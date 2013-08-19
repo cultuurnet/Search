@@ -117,6 +117,8 @@ class Service extends OAuthProtectedService implements ServiceInterface {
       $request->getQuery()->add($parameter->getKey(), $parameter->getValue());
     }
 
+    $request->getQuery()->add('past', 'true');
+
     $response = $request->send();
 
     $xmlElement = new SimpleXMLElement($response->getBody(true), 0, false, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
