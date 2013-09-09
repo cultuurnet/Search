@@ -7,15 +7,13 @@ use \CultuurNet\Auth\Guzzle\OAuthProtectedService;
 use \CultuurNet\Search\ServiceInterface;
 use \CultuurNet\Search\SearchResult;
 use \CultuurNet\Search\SuggestionsResult;
-
+use \CultuurNet\Search\ActivityStatsExtendedEntity;
 use \CultuurNet\Search\Parameter\Query;
-use \CultuurNet\Search\Parameter\QueryParameterInterface;
 use \CultuurNet\Search\Parameter\Type;
 use \CultuurNet\Search\Parameter\Title;
 use \CultuurNet\Search\Parameter\LocalParameterSerializer;
 
 use \SimpleXMLElement;
-use CultuurNet\Search\QueryLog;
 
 class Service extends OAuthProtectedService implements ServiceInterface {
 
@@ -42,51 +40,22 @@ class Service extends OAuthProtectedService implements ServiceInterface {
   }
 
   /**
-   * Perform a search call to the service
-   * @param $path
-   *   Path to call
-   * @param array $parameters
-   *   Parameters to be used in the request.
-   * @return SimpleXMLElement
-   *   Xml returned from the call.
+   * Load the detail of 1 item.
+   * @param string $type
+   *   Type of the item. (example: event)
+   * @param string $id
+   *   ID of the item to load.
+   * @return ActivityStatsExtendedEntity
    */
-  private function executeSearch($path, $parameters) {
+  public function detail($type, $id) {
 
-    $client = $this->getClient();
-
-    $request = $client->get($path);
-    $request->getQuery()->setAggregateFunction(array('\Guzzle\Http\QueryString', 'aggregateUsingDuplicates'));
-
-    $qFound = false;
-
-    foreach ($parameters as $parameter) {
-
-      if ('q' == $parameter->getKey()) {
-        $qFound = true;
-      }
-
-      $value = '';
-      $localParams = $parameter->getLocalParams();
-      if (!empty($localParams)) {
-        if (!isset($localParameterSerializer)) {
-          $localParameterSerializer = new LocalParameterSerializer();
-        }
-        $value = $localParameterSerializer->serialize($localParams);
-      }
-
-      $value .= $parameter->getValue();
-      $request->getQuery()->add($parameter->getKey(), $value);
+    $response = $this->executeSearch('detail/' . $type . '/' . $id);
+    $xmlElement = new SimpleXMLElement($response->getBody(true), 0, false, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
+    $detail = $xmlElement->{$type};
+    if (!empty($detail[0])) {
+      return ActivityStatsExtendedEntity::fromXml($detail[0]);
     }
-
-    if (!$qFound) {
-      // @todo throw an exception because the only mandatory parameter is not present
-    }
-
-    $result = $request->send();
-
-    return $result;
   }
-
 
   /**
    * Get a list of suggestions from the given search string.
@@ -125,6 +94,52 @@ class Service extends OAuthProtectedService implements ServiceInterface {
 
     return SuggestionsResult::fromXml($xmlElement);
 
+  }
+
+  /**
+   * Perform a search call to the service
+   * @param $path
+   *   Path to call
+   * @param array $parameters
+   *   Parameters to be used in the request.
+   * @return SimpleXMLElement
+   *   Xml returned from the call.
+   */
+  private function executeSearch($path, $parameters = array()) {
+
+    $client = $this->getClient();
+
+    $request = $client->get($path);
+    $request->getQuery()->setAggregateFunction(array('\Guzzle\Http\QueryString', 'aggregateUsingDuplicates'));
+
+    $qFound = false;
+
+    foreach ($parameters as $parameter) {
+
+      if ('q' == $parameter->getKey()) {
+        $qFound = true;
+      }
+
+      $value = '';
+      $localParams = $parameter->getLocalParams();
+      if (!empty($localParams)) {
+        if (!isset($localParameterSerializer)) {
+          $localParameterSerializer = new LocalParameterSerializer();
+        }
+        $value = $localParameterSerializer->serialize($localParams);
+      }
+
+      $value .= $parameter->getValue();
+      $request->getQuery()->add($parameter->getKey(), $value);
+    }
+
+    if (!$qFound) {
+      // @todo throw an exception because the only mandatory parameter is not present
+    }
+
+    $result = $request->send();
+
+    return $result;
   }
 
 }
