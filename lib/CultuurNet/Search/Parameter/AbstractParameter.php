@@ -15,12 +15,23 @@ abstract class AbstractParameter implements ParameterInterface {
   }
 
   public function getValue() {
-    $match = array('\\', '+', '-', '&', '|', '!', '(', ')', '{', '}', '[', ']', '^', '~', '*', '?', ':', '"', ';', ' ');
-    $replace = array('\\\\', '\\+', '\\-', '\\&', '\\|', '\\!', '\\(', '\\)', '\\{', '\\}', '\\[', '\\]', '\\^', '\\~', '\\*', '\\?', '\\:', '\\"', '\\;', '\\ ');
-    return str_replace($match, $replace, $this->value);
+    return AbstractParameter::escape($this->value);
   }
 
   public function getLocalParams() {
     return $this->localParams;
   }
+
+  /**
+   * Escape special characters for a correct solr search query.
+   * @param string $string
+   *   String to escape
+   * @return string
+   */
+  public static function escape($string) {
+    $match = array('\\', '+', '-', '&', '|', '!', '(', ')', '{', '}', '[', ']', '^', '~', '*', '?', ':', '"', ';', ' ');
+    $replace = array('\\\\', '\\+', '\\-', '\\&', '\\|', '\\!', '\\(', '\\)', '\\{', '\\}', '\\[', '\\]', '\\^', '\\~', '\\*', '\\?', '\\:', '\\"', '\\;', '\\ ');
+    return str_replace($match, $replace, $string);
+}
+
 }
