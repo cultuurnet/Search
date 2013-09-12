@@ -10,7 +10,7 @@ class Query extends AbstractParameter {
   public function __construct($value) {
 
     // Search queries should not start with a colon.
-    if (strpos(':', $value) == 0) {
+    if (strpos($value, ':') === 0) {
       $value = '\:' . substr($value, 1);
     }
 
