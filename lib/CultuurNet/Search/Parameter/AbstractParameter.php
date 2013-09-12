@@ -15,7 +15,7 @@ abstract class AbstractParameter implements ParameterInterface {
   }
 
   public function getValue() {
-    return AbstractParameter::escape($this->value);
+    return $this->value;
   }
 
   public function getLocalParams() {
