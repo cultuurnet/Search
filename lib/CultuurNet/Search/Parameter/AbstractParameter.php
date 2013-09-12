@@ -15,7 +15,9 @@ abstract class AbstractParameter implements ParameterInterface {
   }
 
   public function getValue() {
-    return $this->value;
+    $match = array('\\', '+', '-', '&', '|', '!', '(', ')', '{', '}', '[', ']', '^', '~', '*', '?', ':', '"', ';', ' ');
+    $replace = array('\\\\', '\\+', '\\-', '\\&', '\\|', '\\!', '\\(', '\\)', '\\{', '\\}', '\\[', '\\]', '\\^', '\\~', '\\*', '\\?', '\\:', '\\"', '\\;', '\\ ');
+    return str_replace($match, $replace, $this->value);
   }
 
   public function getLocalParams() {

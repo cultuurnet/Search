@@ -9,8 +9,7 @@ class Query extends AbstractParameter {
    */
   public function __construct($value) {
     // @todo check type of value, should be string
-    $this->value = ($value == '*:*' || $value == '*') ? $value : urlencode($value);
-
+    $this->value = $value;
     $this->key = 'q';
   }
 
