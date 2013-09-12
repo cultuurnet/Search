@@ -26,8 +26,10 @@ interface ServiceInterface {
    *   String to get suggestions for.
    * @param array $types
    *   Types to search for. Example page.
+   * @param bool $past
+   *   Also search suggestions for past events.
    */
-  public function searchSuggestions($search_string, $types = array());
+  public function searchSuggestions($search_string, $types = array(), $past = FALSE);
 
   /**
    * Load the detail of 1 item.

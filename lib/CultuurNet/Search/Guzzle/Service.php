@@ -63,8 +63,10 @@ class Service extends OAuthProtectedService implements ServiceInterface {
    *   String to get suggestions for.
    * @param array $types
    *   Types to search for. Example page.
+   * @param bool $past
+   *   Also search suggestions for past events.
    */
-  public function searchSuggestions($search_string, $types = null) {
+  public function searchSuggestions($search_string, $types = null, $past = FALSE) {
 
     $client = $this->getClient();
     $request = $client->get($search_path = empty($types) ? 'search/suggest' : 'search/suggest/item');
@@ -86,7 +88,9 @@ class Service extends OAuthProtectedService implements ServiceInterface {
       $request->getQuery()->add($parameter->getKey(), $parameter->getValue());
     }
 
-    $request->getQuery()->add('past', 'true');
+    if ($past) {
+      $request->getQuery()->add('past', 'true');
+    }
 
     $response = $request->send();
 
