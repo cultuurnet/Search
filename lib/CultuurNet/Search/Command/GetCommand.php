@@ -58,8 +58,30 @@ class GetCommand extends Command {
 
         $queryFile = $input->getOption('query-file');
         if (NULL !== $queryFile) {
-            $json = file_get_contents($queryFile);
-            $config = json_decode($json, TRUE);
+            $fileUtility = $this->getFileUtility();
+            $queryFile = $fileUtility->expandPath($queryFile);
+            if (!file_exists($queryFile) || !is_readable($queryFile)) {
+                throw new \RuntimeException('The "--query-file" option requires a path to an existing, readable file.');
+            }
+
+            $extension = pathinfo($queryFile, PATHINFO_EXTENSION);
+
+            $fileContents = file_get_contents($queryFile);
+
+            switch ($extension) {
+                case 'yml':
+                    if (!class_exists('Symfony\Component\Yaml\Parser')) {
+                        throw new \RuntimeException(sprintf('Parsing the YAML file %s requires the Symfony YAML component.', $queryFile));
+                    }
+
+                    $parser = new Symfony\Component\Yaml\Parser();
+                    $config = $parser->parse($fileContents);
+                    break;
+
+                default:
+                    $config = json_decode($fileContents, TRUE);
+            }
+
             foreach ($config as $key => $value) {
                 $request->getQuery()->add($key, $value);
             }

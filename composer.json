@@ -10,6 +10,9 @@
         "guzzle/plugin-oauth": "3.1.*",
         "symfony/console": "2.2.*@dev"
     },
+    "suggest": {
+        "symfony/yaml": "Allows passing YAML files to certain commands."
+    },
     "autoload": {
         "psr-0": {
             "CultuurNet\\Search": ["lib"]
