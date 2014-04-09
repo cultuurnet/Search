@@ -65,8 +65,10 @@ class Service extends OAuthProtectedService implements ServiceInterface {
    *   Types to search for. Example page.
    * @param bool $past
    *   Also search suggestions for past events.
+   * @param array $extra_parameters
+   *   Extra parameters to add to the search query.
    */
-  public function searchSuggestions($search_string, $types = null, $past = FALSE) {
+  public function searchSuggestions($search_string, $types = null, $past = FALSE, $extra_parameters = array()) {
 
     $client = $this->getClient();
     $request = $client->get($search_path = empty($types) ? 'search/suggest' : 'search/suggest/item');
@@ -86,6 +88,23 @@ class Service extends OAuthProtectedService implements ServiceInterface {
     else {
       $parameter = new Query($search_string);
       $request->getQuery()->add($parameter->getKey(), $parameter->getValue());
+    }
+    
+    // Add additional requested parameters.
+    foreach ($extra_parameters as $parameter) {
+
+      $value = '';
+      $localParams = $parameter->getLocalParams();
+      if (!empty($localParams)) {
+        if (!isset($localParameterSerializer)) {
+          $localParameterSerializer = new LocalParameterSerializer();
+        }
+        $value = $localParameterSerializer->serialize($localParams);
+      }
+
+      $value .= $parameter->getValue();
+
+      $request->getQuery()->add($parameter->getKey(), $value);
     }
 
     if ($past) {

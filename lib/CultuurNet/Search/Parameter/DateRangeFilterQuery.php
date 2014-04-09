@@ -35,7 +35,9 @@ class DateRangeFilterQuery extends FilterQuery {
    * Return the search value.
    */
   public function getValue() {
-    return $this->field . ':[' . date('Y-m-d\TH:i:s\Z', $this->startDate) . ' TO ' . date('Y-m-d\TH:i:s\Z', $this->endDate) . ']';
+    $startRange = $this->startDate == '*' ? $this->startDate : date('Y-m-d\TH:i:s\Z', $this->startDate);
+    $endRange = $this->endDate == '*' ? $this->endDate : date('Y-m-d\TH:i:s\Z', $this->endDate);
+    return $this->field . ':[' . $startRange . ' TO ' . $endRange . ']';
   }
 
 }
