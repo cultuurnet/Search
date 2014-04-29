@@ -28,8 +28,10 @@ interface ServiceInterface {
    *   Types to search for. Example page.
    * @param bool $past
    *   Also search suggestions for past events.
+   * @param array $extra_parameters
+   *   Extra parameters to add to the search query.
    */
-  public function searchSuggestions($search_string, $types = array(), $past = FALSE);
+  public function searchSuggestions($search_string, $types = array(), $past = FALSE, $extra_parameters = array());
 
   /**
    * Load the detail of 1 item.
