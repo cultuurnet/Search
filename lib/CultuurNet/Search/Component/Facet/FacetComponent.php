@@ -35,42 +35,8 @@ class FacetComponent {
 
     $xmlElement = $result->getXmlElement();
 
-    if (!empty($xmlElement->facets)) {
-      foreach ($xmlElement->facets->facet as $facetElement) {
+    $factory = new FacetFactory();
 
-        $facetAttributes = $facetElement->attributes();
-        $field = (string) $facetAttributes['field'];
-
-        // Category is a special facet. This is a fake facet that returns
-        // all the results for every possible category facet.
-        // Map it to the correct facet.
-        if ($field == 'category') {
-          $field = 'category_' . $facetAttributes['domain'] . '_id';
-          if (!isset($this->facets[$field])) {
-            $this->facets[$field] = new Facet($field, new FacetField($field));
-          }
-        }
-
-        if (isset($this->facets[$field])) {
-
-          $facet = $this->facets[$field];
-          $value = isset($facetAttributes['id']) ? (string) $facetAttributes['id'] : (string) $facetAttributes['name'];
-          $facetResultItem = new FacetResultItem((string) $facetAttributes['name'], $value, (int) $facetAttributes['total']);
-
-          // Check if this facet has children.
-          //if (!empty($facetElement->facet)) {
-          foreach ($facetElement->facet as $childFacetElement) {
-            $childFacetAttributes = $childFacetElement->attributes();
-            $value = isset($childFacetAttributes['id']) ? (string) $childFacetAttributes['id'] : (string) $childFacetAttributes['name'];
-            $facetResultItem->addSubItem(new FacetResultItem((string) $childFacetAttributes['name'], $value, (int) $childFacetAttributes['total']));
-          }
-
-          $facet->getResult()->addItem($facetResultItem);
-
-        }
-
-      }
-    }
-
+    $this->facets = $factory->createFromXML($xmlElement);
   }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cdb:cdbxml xmlns:cdb="http://www.cultuurdatabank.com/XMLSchema/CdbXSD/3.2/FINAL">
+    <cdb:facets>
+        <cdb:facet domain="flanderstouristregion" field="category" id="reg.367" name="Kunststad Leuven" total="5"/>
+        <cdb:facet domain="flanderstouristregion" field="category" id="reg.364" name="Groene Gordel" total="50"/>
+        <cdb:facet domain="flandersregion" field="category" id="reg.31" name="Provincie Vlaams-Brabant" total="721">
+            <cdb:facet domain="flandersregion" field="category" id="reg.12" name="Regio Halle - Dilbeek" total="5">
+                <cdb:facet domain="flandersregion" field="category" id="reg.47" name="Dilbeek" total="5">
+                    <cdb:facet domain="flandersregion" field="category" id="reg.405" name="1701 Itterbeek (Dilbeek)" total="5"/>
+                </cdb:facet>
+            </cdb:facet>
+            <cdb:facet domain="flandersregion" field="category" id="reg.16" name="Regio Leuven" total="716">
+                <cdb:facet domain="flandersregion" field="category" id="reg.141" name="Leuven" total="64">
+                    <cdb:facet domain="flandersregion" field="category" id="reg.638" name="3000 Leuven" total="5"/>
+                    <cdb:facet domain="flandersregion" field="category" id="reg.639" name="3001 Heverlee (Leuven)" total="54"/>
+                    <cdb:facet domain="flandersregion" field="category" id="reg.640" name="3010 Kessel-Lo (Leuven)" total="4"/>
+                </cdb:facet>
+                <cdb:facet domain="flandersregion" field="category" id="reg.143" name="Huldenberg" total="481">
+                    <cdb:facet domain="flandersregion" field="category" id="reg.646" name="3040 Huldenberg" total="474"/>
+                    <cdb:facet domain="flandersregion" field="category" id="reg.648" name="3040 Neerijse (Huldenberg)" total="7"/>
+                </cdb:facet>
+                <cdb:facet domain="flandersregion" field="category" id="reg.144" name="Oud-Heverlee" total="50">
+                    <cdb:facet domain="flandersregion" field="category" id="reg.651" name="3050 Oud-Heverlee" total="50"/>
+                </cdb:facet>
+                <cdb:facet domain="flandersregion" field="category" id="reg.146" name="Kortenberg" total="3">
+                    <cdb:facet domain="flandersregion" field="category" id="reg.660" name="3071 Erps-Kwerps (Kortenberg)" total="3"/>
+                </cdb:facet>
+                <cdb:facet domain="flandersregion" field="category" id="reg.148" name="Overijse" total="96">
+                    <cdb:facet domain="flandersregion" field="category" id="reg.666" name="3090 Overijse" total="96"/>
+                </cdb:facet>
+                <cdb:facet domain="flandersregion" field="category" id="reg.150" name="Tremelo" total="9">
+                    <cdb:facet domain="flandersregion" field="category" id="reg.671" name="3128 Baal (Tremelo)" total="9"/>
+                </cdb:facet>
+                <cdb:facet domain="flandersregion" field="category" id="reg.157" name="Holsbeek" total="13">
+                    <cdb:facet domain="flandersregion" field="category" id="reg.691" name="3221 Nieuwrode (Holsbeek)" total="12"/>
+                </cdb:facet>
+            </cdb:facet>
+        </cdb:facet>
+    </cdb:facets>
+</cdb:cdbxml>
