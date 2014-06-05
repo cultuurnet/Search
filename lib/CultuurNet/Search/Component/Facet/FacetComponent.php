@@ -32,11 +32,9 @@ class FacetComponent {
   }
 
   public function obtainResults(SearchResult $result) {
-
     $xmlElement = $result->getXmlElement();
-
     $factory = new FacetFactory();
 
-    $this->facets = $factory->createFromXML($xmlElement);
+    $this->facets = $factory->createFromXML($xmlElement, $this->facets);
   }
 }

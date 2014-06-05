@@ -15,10 +15,8 @@ class FacetFactory
      *
      * @return Facet[]
      */
-    public function createFromXML(\SimpleXMLElement $xml)
+    public function createFromXML(\SimpleXMLElement $xml, $facets = array())
     {
-        $facets = array();
-
         if (!empty($xml->facets)) {
             /** @var \SimpleXMLElement $facetElement */
             foreach ($xml->facets->facet as $facetElement) {
@@ -50,7 +48,6 @@ class FacetFactory
         }
 
         return $facets;
-
     }
 
     /**
