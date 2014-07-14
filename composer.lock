@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "6e01e3b764b7352b21e35c97170de50b",
+    "hash": "4ac39df35c06ee140823b3100cb4ec10",
     "packages": [
         {
             "name": "cultuurnet/auth",
@@ -11,21 +11,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cultuurnet/Auth.git",
-                "reference": "0b42c396b97d545e93ff0f1b6c86205e22192d4e"
+                "reference": "e11fdd0ac0f7e1f16b7cb86e8deeed16bf5b6830"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cultuurnet/Auth/zipball/0b42c396b97d545e93ff0f1b6c86205e22192d4e",
-                "reference": "0b42c396b97d545e93ff0f1b6c86205e22192d4e",
+                "url": "https://api.github.com/repos/cultuurnet/Auth/zipball/e11fdd0ac0f7e1f16b7cb86e8deeed16bf5b6830",
+                "reference": "e11fdd0ac0f7e1f16b7cb86e8deeed16bf5b6830",
                 "shasum": ""
             },
             "require": {
                 "guzzle/http": "3.1.*",
                 "guzzle/plugin-cookie": "3.1.*",
+                "guzzle/plugin-log": "3.1.*",
                 "guzzle/plugin-oauth": "3.1.*",
-                "justinrainbow/json-schema": "1.1.*",
+                "justinrainbow/json-schema": "1.3.*",
                 "php": ">=5.3.0",
-                "symfony/console": "2.2.*@dev"
+                "symfony/console": "2.2.*"
             },
             "bin": [
                 "bin/cultuurnet-auth"
@@ -48,26 +49,26 @@
                 "Apache-2.0"
             ],
             "description": "Authentication service for CultuurNet web services",
-            "time": "2013-04-12 20:53:33"
+            "time": "2013-09-11 00:04:56"
         },
         {
             "name": "cultuurnet/cdb",
-            "version": "2.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cultuurnet/Cdb.git",
-                "reference": "4168bb226b9b814083765b60de5746c903f3d461"
+                "reference": "e547c9e6937f7ae77f1abd94d8f996839c682101"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cultuurnet/Cdb/zipball/4168bb226b9b814083765b60de5746c903f3d461",
-                "reference": "4168bb226b9b814083765b60de5746c903f3d461",
+                "url": "https://api.github.com/repos/cultuurnet/Cdb/zipball/e547c9e6937f7ae77f1abd94d8f996839c682101",
+                "reference": "e547c9e6937f7ae77f1abd94d8f996839c682101",
                 "shasum": ""
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-release/2.x": "2.x-dev"
                 }
             },
             "autoload": {
@@ -82,7 +83,7 @@
                 "Apache-2.0"
             ],
             "description": "PHP library for hydrating/manipulating CultuurNet's Cdb XML documents",
-            "time": "2013-04-12 15:35:33"
+            "time": "2014-03-24 15:53:14"
         },
         {
             "name": "guzzle/common",
@@ -90,13 +91,13 @@
             "target-dir": "Guzzle/Common",
             "source": {
                 "type": "git",
-                "url": "git://github.com/guzzle/common.git",
-                "reference": "v3.1.2"
+                "url": "https://github.com/guzzle/common.git",
+                "reference": "b3d8253413b4cbcf6c223b1570eb3646047fd31a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/guzzle/common/archive/v3.1.2.zip",
-                "reference": "v3.1.2",
+                "url": "https://api.github.com/repos/guzzle/common/zipball/b3d8253413b4cbcf6c223b1570eb3646047fd31a",
+                "reference": "b3d8253413b4cbcf6c223b1570eb3646047fd31a",
                 "shasum": ""
             },
             "require": {
@@ -134,13 +135,13 @@
             "target-dir": "Guzzle/Http",
             "source": {
                 "type": "git",
-                "url": "git://github.com/guzzle/http.git",
-                "reference": "v3.1.2"
+                "url": "https://github.com/guzzle/http.git",
+                "reference": "deaea3aa4e03bae2541117b8fd3d66838f9bc42c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/guzzle/http/archive/v3.1.2.zip",
-                "reference": "v3.1.2",
+                "url": "https://api.github.com/repos/guzzle/http/zipball/deaea3aa4e03bae2541117b8fd3d66838f9bc42c",
+                "reference": "deaea3aa4e03bae2541117b8fd3d66838f9bc42c",
                 "shasum": ""
             },
             "require": {
@@ -186,18 +187,70 @@
             "time": "2013-01-26 08:20:43"
         },
         {
+            "name": "guzzle/log",
+            "version": "v3.1.2",
+            "target-dir": "Guzzle/Log",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/log.git",
+                "reference": "31da1c019dac8465f5c6e7d4a2ecf7bed986f67f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/log/zipball/31da1c019dac8465f5c6e7d4a2ecf7bed986f67f",
+                "reference": "31da1c019dac8465f5c6e7d4a2ecf7bed986f67f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "suggest": {
+                "guzzle/http": "v3.1.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Log": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle log adapter component",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "adapter",
+                "log"
+            ],
+            "time": "2012-12-07 16:45:11"
+        },
+        {
             "name": "guzzle/parser",
             "version": "v3.1.2",
             "target-dir": "Guzzle/Parser",
             "source": {
                 "type": "git",
-                "url": "git://github.com/guzzle/parser.git",
-                "reference": "v3.1.2"
+                "url": "https://github.com/guzzle/parser.git",
+                "reference": "b3145907487c43a5b1ae3070c1daff804e47f86d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/guzzle/parser/archive/v3.1.2.zip",
-                "reference": "v3.1.2",
+                "url": "https://api.github.com/repos/guzzle/parser/zipball/b3145907487c43a5b1ae3070c1daff804e47f86d",
+                "reference": "b3145907487c43a5b1ae3070c1daff804e47f86d",
                 "shasum": ""
             },
             "require": {
@@ -235,13 +288,13 @@
             "target-dir": "Guzzle/Plugin/Cookie",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guzzle/plugin-cookie",
-                "reference": "v3.0.7"
+                "url": "https://github.com/guzzle/plugin-cookie.git",
+                "reference": "eb10db730281d58a480c566cc3edc7889b24aef1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/guzzle/plugin-cookie/archive/v3.0.7.zip",
-                "reference": "v3.0.7",
+                "url": "https://api.github.com/repos/guzzle/plugin-cookie/zipball/eb10db730281d58a480c566cc3edc7889b24aef1",
+                "reference": "eb10db730281d58a480c566cc3edc7889b24aef1",
                 "shasum": ""
             },
             "require": {
@@ -279,18 +332,69 @@
             "time": "2012-12-07 16:45:11"
         },
         {
+            "name": "guzzle/plugin-log",
+            "version": "v3.1.2",
+            "target-dir": "Guzzle/Plugin/Log",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/plugin-log.git",
+                "reference": "12166004672f41c1e6d777e7c1b514422eeafa6a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/plugin-log/zipball/12166004672f41c1e6d777e7c1b514422eeafa6a",
+                "reference": "12166004672f41c1e6d777e7c1b514422eeafa6a",
+                "shasum": ""
+            },
+            "require": {
+                "guzzle/http": "self.version",
+                "guzzle/log": "self.version",
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Plugin\\Log": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle log plugin for over the wire logging",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "log",
+                "plugin"
+            ],
+            "time": "2013-01-13 05:09:32"
+        },
+        {
             "name": "guzzle/plugin-oauth",
             "version": "v3.1.2",
             "target-dir": "Guzzle/Plugin/Oauth",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guzzle/plugin-oauth",
-                "reference": "v3.0.7"
+                "url": "https://github.com/guzzle/plugin-oauth.git",
+                "reference": "e2b7c6b2153deb7d837618a0e69ff53a3e6bc9d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/guzzle/plugin-oauth/archive/v3.0.7.zip",
-                "reference": "v3.0.7",
+                "url": "https://api.github.com/repos/guzzle/plugin-oauth/zipball/e2b7c6b2153deb7d837618a0e69ff53a3e6bc9d0",
+                "reference": "e2b7c6b2153deb7d837618a0e69ff53a3e6bc9d0",
                 "shasum": ""
             },
             "require": {
@@ -334,13 +438,13 @@
             "target-dir": "Guzzle/Stream",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guzzle/stream",
-                "reference": "v3.0.7"
+                "url": "https://github.com/guzzle/stream.git",
+                "reference": "c499757c760159188a9573362b8086ef25e6734e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/guzzle/stream/archive/v3.0.7.zip",
-                "reference": "v3.0.7",
+                "url": "https://api.github.com/repos/guzzle/stream/zipball/c499757c760159188a9573362b8086ef25e6734e",
+                "reference": "c499757c760159188a9573362b8086ef25e6734e",
                 "shasum": ""
             },
             "require": {
@@ -380,22 +484,35 @@
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "1.1.0",
+            "version": "1.3.6",
             "source": {
                 "type": "git",
-                "url": "git://github.com/justinrainbow/json-schema.git",
-                "reference": "v1.1.0"
+                "url": "https://github.com/justinrainbow/json-schema.git",
+                "reference": "d97cf3ce890fe80f247fc08594a1c8a1029fc7ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/justinrainbow/json-schema/zipball/v1.1.0",
-                "reference": "v1.1.0",
+                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/d97cf3ce890fe80f247fc08594a1c8a1029fc7ed",
+                "reference": "d97cf3ce890fe80f247fc08594a1c8a1029fc7ed",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
+            "require-dev": {
+                "json-schema/json-schema-test-suite": "1.1.0",
+                "phpdocumentor/phpdocumentor": "~2",
+                "phpunit/phpunit": "~3.7"
+            },
+            "bin": [
+                "bin/validate-json"
+            ],
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "JsonSchema": "src/"
@@ -403,7 +520,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "NewBSD"
+                "BSD-3-Clause"
             ],
             "authors": [
                 {
@@ -431,7 +548,7 @@
                 "json",
                 "schema"
             ],
-            "time": "2012-01-02 16:33:17"
+            "time": "2014-03-05 15:03:52"
         },
         {
             "name": "symfony/console",
@@ -440,12 +557,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "a4aeb9fa57cb4e69310311cd2ddb82bc12d2112d"
+                "reference": "89e82ad2d09ce753359efc942ce6309053023c47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/a4aeb9fa57cb4e69310311cd2ddb82bc12d2112d",
-                "reference": "a4aeb9fa57cb4e69310311cd2ddb82bc12d2112d",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/89e82ad2d09ce753359efc942ce6309053023c47",
+                "reference": "89e82ad2d09ce753359efc942ce6309053023c47",
                 "shasum": ""
             },
             "require": {
@@ -469,7 +586,9 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 },
                 {
                     "name": "Symfony Community",
@@ -478,37 +597,40 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2013-04-12 13:15:07"
+            "time": "2013-11-25 08:44:14"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.2.1",
+            "version": "v2.5.1",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "v2.2.1"
+                "reference": "84533bf98da5486b9395a1d95e9184e04e14aad3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/v2.2.1",
-                "reference": "v2.2.1",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/84533bf98da5486b9395a1d95e9184e04e14aad3",
+                "reference": "84533bf98da5486b9395a1d95e9184e04e14aad3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "symfony/dependency-injection": ">=2.0,<3.0"
+                "psr/log": "~1.0",
+                "symfony/config": "~2.0",
+                "symfony/dependency-injection": "~2.0",
+                "symfony/stopwatch": "~2.2"
             },
             "suggest": {
-                "symfony/dependency-injection": "2.2.*",
-                "symfony/http-kernel": "2.2.*"
+                "symfony/dependency-injection": "",
+                "symfony/http-kernel": ""
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -523,7 +645,9 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 },
                 {
                     "name": "Symfony Community",
@@ -532,7 +656,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2013-02-11 11:26:43"
+            "time": "2014-07-08 12:21:33"
         }
     ],
     "packages-dev": [
