@@ -58,6 +58,36 @@ class Service extends OAuthProtectedService implements ServiceInterface {
   }
 
   /**
+   * Get a list of deleted items.
+   * @param int $deleted_since
+   *   Timestamp to filter on.
+   * @return Array of deleted id's.
+   */
+  public function getDeletions($deleted_since = NULL) {
+
+    $client = $this->getClient();
+
+    $request = $client->get('search/deleted');
+
+    if (!empty($deleted_since)) {
+      $request->getQuery()->add('deleted_since', $deleted_since);
+    }
+
+    $response = $request->send();
+    $xmlElement = new SimpleXMLElement($response->getBody(true));
+
+    $deletedIds = array();
+    if (!empty($xmlElement->items)) {
+      foreach ($xmlElement->items->item as $deletedItem) {
+        $deletedIds[] = (string) $deletedItem;
+      }
+    }
+
+    return $deletedIds;
+
+  }
+
+  /**
    * Get a list of suggestions from the given search string.
    * @param string $search
    *   String to get suggestions for.
@@ -89,7 +119,7 @@ class Service extends OAuthProtectedService implements ServiceInterface {
       $parameter = new Query($search_string);
       $request->getQuery()->add($parameter->getKey(), $parameter->getValue());
     }
-    
+
     // Add additional requested parameters.
     foreach ($extra_parameters as $parameter) {
 

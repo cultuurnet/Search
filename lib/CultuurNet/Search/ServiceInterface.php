@@ -42,4 +42,13 @@ interface ServiceInterface {
    * @return ActivityStatsExtendedEntity
    */
   public function detail($type, $id);
+
+  /**
+   * Get a list of deleted items.
+   * @param int $deleted_since
+   *   Timestamp to filter on.
+   * @return Array of deleted id's.
+   */
+  public function getDeletions($deleted_since = NULL);
+
 }
