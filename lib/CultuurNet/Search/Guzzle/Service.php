@@ -61,9 +61,13 @@ class Service extends OAuthProtectedService implements ServiceInterface {
    * Get a list of deleted items.
    * @param int $deleted_since
    *   Timestamp to filter on.
+   * @param int $rows
+   *   Total rows to get.
+   * @param int $start
+   *   Starting page.
    * @return Array of deleted id's.
    */
-  public function getDeletions($deleted_since = NULL) {
+  public function getDeletions($deleted_since = NULL, $rows = NULL, $start = NULL) {
 
     $client = $this->getClient();
 
@@ -71,6 +75,14 @@ class Service extends OAuthProtectedService implements ServiceInterface {
 
     if (!empty($deleted_since)) {
       $request->getQuery()->add('deleted_since', $deleted_since);
+    }
+
+    if ($rows !== NULL) {
+      $request->getQuery()->add('rows', $rows);
+    }
+
+    if ($start !== NULL) {
+      $request->getQuery()->add('start', $start);
     }
 
     $response = $request->send();

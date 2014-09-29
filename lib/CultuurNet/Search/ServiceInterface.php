@@ -47,8 +47,12 @@ interface ServiceInterface {
    * Get a list of deleted items.
    * @param int $deleted_since
    *   Timestamp to filter on.
+   * @param int $rows
+   *   Total rows to get.
+   * @param int $start
+   *   Starting page.
    * @return Array of deleted id's.
    */
-  public function getDeletions($deleted_since = NULL);
+  public function getDeletions($deleted_since = NULL, $rows = NULL, $start = NULL);
 
 }
