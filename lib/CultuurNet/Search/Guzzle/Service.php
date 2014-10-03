@@ -74,7 +74,7 @@ class Service extends OAuthProtectedService implements ServiceInterface {
     $request = $client->get('search/deleted');
 
     if (!empty($deleted_since)) {
-      $request->getQuery()->add('deleted_since', $deleted_since);
+      $request->getQuery()->add('deletedsince', $deleted_since);
     }
 
     if ($rows !== NULL) {
