@@ -10,6 +10,8 @@ use \CultuurNet\Auth\Command\Command;
 use \CultuurNet\Search\Guzzle\Service;
 
 use \CultuurNet\Auth\Guzzle\DefaultHttpClientFactory;
+use Guzzle\Http\Exception\ClientErrorResponseException;
+use Guzzle\Http\QueryAggregator\DuplicateAggregator;
 use \Symfony\Component\Console\Input\InputInterface;
 use \Symfony\Component\Console\Input\InputArgument;
 use \Symfony\Component\Console\Output\OutputInterface;
@@ -51,7 +53,7 @@ class GetCommand extends Command {
         $client = $clientFactory->createClient($searchBaseUrl, $this->session->getConsumerCredentials(), $tokenCredentials);
 
         $request = $client->get($input->getArgument('path'));
-        $request->getQuery()->setAggregateFunction(array('\Guzzle\Http\QueryString', 'aggregateUsingDuplicates'));
+        $request->getQuery()->setAggregator(new DuplicateAggregator());
 
         // @todo add query parameters, from JSON and/or yaml file or from simple CLI options
         //$getRequest->getQuery()->set($key, $value);
@@ -65,20 +67,29 @@ class GetCommand extends Command {
             }
         }
 
-        $response = $request->send();
+        try {
+            $response = $request->send();
 
-        $output->writeln('');
-        $output->writeln('');
-        $output->writeln('Request');
-        $output->writeln('');
-        $output->writeln((string)$request);
+            $output->writeln('');
+            $output->writeln('');
+            $output->writeln('Request');
+            $output->writeln('');
+            $output->writeln((string)$request);
 
-        $output->writeln('');
-        $output->writeln('');
-        $output->writeln('Response');
-        $output->writeln('');
-        $output->writeln((string)$response);
-        $output->writeln('');
-        $output->writeln('');
+            $output->writeln('');
+            $output->writeln('');
+            $output->writeln('Response');
+            $output->writeln('');
+            $output->writeln((string)$response);
+            $output->writeln('');
+            $output->writeln('');
+        }
+        catch (ClientErrorResponseException $e) {
+            $output->writeln((string)$e->getRequest());
+            $output->writeln((string)$e->getResponse());
+
+        }
+
+
     }
 }

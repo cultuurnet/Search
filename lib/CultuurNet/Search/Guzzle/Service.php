@@ -13,6 +13,7 @@ use \CultuurNet\Search\Parameter\Type;
 use \CultuurNet\Search\Parameter\Title;
 use \CultuurNet\Search\Parameter\LocalParameterSerializer;
 
+use Guzzle\Http\QueryAggregator\DuplicateAggregator;
 use \SimpleXMLElement;
 
 class Service extends OAuthProtectedService implements ServiceInterface {
@@ -114,7 +115,7 @@ class Service extends OAuthProtectedService implements ServiceInterface {
 
     $client = $this->getClient();
     $request = $client->get($search_path = empty($types) ? 'search/suggest' : 'search/suggest/item');
-    $request->getQuery()->setAggregateFunction(array('\Guzzle\Http\QueryString', 'aggregateUsingDuplicates'));
+    $request->getQuery()->setAggregator(new DuplicateAggregator());
 
     if (!empty($types)) {
 
@@ -175,7 +176,7 @@ class Service extends OAuthProtectedService implements ServiceInterface {
     $client = $this->getClient();
 
     $request = $client->get($path);
-    $request->getQuery()->setAggregateFunction(array('\Guzzle\Http\QueryString', 'aggregateUsingDuplicates'));
+    $request->getQuery()->setAggregator(new DuplicateAggregator());
 
     $qFound = false;
 
