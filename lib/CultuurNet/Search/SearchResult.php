@@ -128,7 +128,8 @@ class SearchResult {
     // Store string version of xml, so the result object can be cached.
     $result->xml = $xmlElement->asXML();
 
-    if (!empty($xmlElement->items)) {
+    if (!empty($xmlElement->items) && !empty($xmlElement->items->item)) {
+
       foreach ($xmlElement->items->item as $xmlItem) {
         $entity = ActivityStatsExtendedEntity::fromPagesXml($xmlItem);
         if ($entity) {
