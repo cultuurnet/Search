@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "4ac39df35c06ee140823b3100cb4ec10",
+    "hash": "2230a51c97a444908919957d2ca565c0",
     "packages": [
         {
             "name": "cultuurnet/auth",
@@ -91,13 +92,13 @@
             "target-dir": "Guzzle/Common",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guzzle/common.git",
-                "reference": "b3d8253413b4cbcf6c223b1570eb3646047fd31a"
+                "url": "git://github.com/guzzle/common.git",
+                "reference": "v3.1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/common/zipball/b3d8253413b4cbcf6c223b1570eb3646047fd31a",
-                "reference": "b3d8253413b4cbcf6c223b1570eb3646047fd31a",
+                "url": "https://github.com/guzzle/common/archive/v3.1.2.zip",
+                "reference": "v3.1.2",
                 "shasum": ""
             },
             "require": {
@@ -135,13 +136,13 @@
             "target-dir": "Guzzle/Http",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guzzle/http.git",
-                "reference": "deaea3aa4e03bae2541117b8fd3d66838f9bc42c"
+                "url": "git://github.com/guzzle/http.git",
+                "reference": "v3.1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/http/zipball/deaea3aa4e03bae2541117b8fd3d66838f9bc42c",
-                "reference": "deaea3aa4e03bae2541117b8fd3d66838f9bc42c",
+                "url": "https://github.com/guzzle/http/archive/v3.1.2.zip",
+                "reference": "v3.1.2",
                 "shasum": ""
             },
             "require": {
@@ -244,13 +245,13 @@
             "target-dir": "Guzzle/Parser",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guzzle/parser.git",
-                "reference": "b3145907487c43a5b1ae3070c1daff804e47f86d"
+                "url": "git://github.com/guzzle/parser.git",
+                "reference": "v3.1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/parser/zipball/b3145907487c43a5b1ae3070c1daff804e47f86d",
-                "reference": "b3145907487c43a5b1ae3070c1daff804e47f86d",
+                "url": "https://github.com/guzzle/parser/archive/v3.1.2.zip",
+                "reference": "v3.1.2",
                 "shasum": ""
             },
             "require": {
@@ -288,13 +289,13 @@
             "target-dir": "Guzzle/Plugin/Cookie",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guzzle/plugin-cookie.git",
-                "reference": "eb10db730281d58a480c566cc3edc7889b24aef1"
+                "url": "https://github.com/guzzle/plugin-cookie",
+                "reference": "v3.0.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/plugin-cookie/zipball/eb10db730281d58a480c566cc3edc7889b24aef1",
-                "reference": "eb10db730281d58a480c566cc3edc7889b24aef1",
+                "url": "https://github.com/guzzle/plugin-cookie/archive/v3.0.7.zip",
+                "reference": "v3.0.7",
                 "shasum": ""
             },
             "require": {
@@ -388,13 +389,13 @@
             "target-dir": "Guzzle/Plugin/Oauth",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guzzle/plugin-oauth.git",
-                "reference": "e2b7c6b2153deb7d837618a0e69ff53a3e6bc9d0"
+                "url": "https://github.com/guzzle/plugin-oauth",
+                "reference": "v3.0.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/plugin-oauth/zipball/e2b7c6b2153deb7d837618a0e69ff53a3e6bc9d0",
-                "reference": "e2b7c6b2153deb7d837618a0e69ff53a3e6bc9d0",
+                "url": "https://github.com/guzzle/plugin-oauth/archive/v3.0.7.zip",
+                "reference": "v3.0.7",
                 "shasum": ""
             },
             "require": {
@@ -438,13 +439,13 @@
             "target-dir": "Guzzle/Stream",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guzzle/stream.git",
-                "reference": "c499757c760159188a9573362b8086ef25e6734e"
+                "url": "https://github.com/guzzle/stream",
+                "reference": "v3.0.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/stream/zipball/c499757c760159188a9573362b8086ef25e6734e",
-                "reference": "c499757c760159188a9573362b8086ef25e6734e",
+                "url": "https://github.com/guzzle/stream/archive/v3.0.7.zip",
+                "reference": "v3.0.7",
                 "shasum": ""
             },
             "require": {
@@ -484,16 +485,16 @@
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "1.3.6",
+            "version": "1.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/justinrainbow/json-schema.git",
-                "reference": "d97cf3ce890fe80f247fc08594a1c8a1029fc7ed"
+                "reference": "87b54b460febed69726c781ab67462084e97a105"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/d97cf3ce890fe80f247fc08594a1c8a1029fc7ed",
-                "reference": "d97cf3ce890fe80f247fc08594a1c8a1029fc7ed",
+                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/87b54b460febed69726c781ab67462084e97a105",
+                "reference": "87b54b460febed69726c781ab67462084e97a105",
                 "shasum": ""
             },
             "require": {
@@ -524,11 +525,6 @@
             ],
             "authors": [
                 {
-                    "name": "Igor Wiedler",
-                    "email": "igor@wiedler.ch",
-                    "homepage": "http://wiedler.ch/igor/"
-                },
-                {
                     "name": "Bruno Prieto Reis",
                     "email": "bruno.p.reis@gmail.com"
                 },
@@ -537,9 +533,12 @@
                     "email": "justin.rainbow@gmail.com"
                 },
                 {
+                    "name": "Igor Wiedler",
+                    "email": "igor@wiedler.ch"
+                },
+                {
                     "name": "Robert Schönthal",
-                    "email": "seroscho@googlemail.com",
-                    "homepage": "http://digitalkaoz.net"
+                    "email": "seroscho@googlemail.com"
                 }
             ],
             "description": "A library to validate a json schema.",
@@ -548,7 +547,7 @@
                 "json",
                 "schema"
             ],
-            "time": "2014-03-05 15:03:52"
+            "time": "2014-08-25 02:48:14"
         },
         {
             "name": "symfony/console",
@@ -601,17 +600,17 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.5.1",
+            "version": "v2.5.5",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "84533bf98da5486b9395a1d95e9184e04e14aad3"
+                "reference": "f6281337bf5f985f585d1db6a83adb05ce531f46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/84533bf98da5486b9395a1d95e9184e04e14aad3",
-                "reference": "84533bf98da5486b9395a1d95e9184e04e14aad3",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/f6281337bf5f985f585d1db6a83adb05ce531f46",
+                "reference": "f6281337bf5f985f585d1db6a83adb05ce531f46",
                 "shasum": ""
             },
             "require": {
@@ -620,7 +619,7 @@
             "require-dev": {
                 "psr/log": "~1.0",
                 "symfony/config": "~2.0",
-                "symfony/dependency-injection": "~2.0",
+                "symfony/dependency-injection": "~2.0,<2.6.0",
                 "symfony/stopwatch": "~2.2"
             },
             "suggest": {
@@ -644,37 +643,30 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
-                },
-                {
                     "name": "Symfony Community",
                     "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2014-07-08 12:21:33"
+            "time": "2014-09-28 15:56:11"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "cultuurnet/auth": 20,
         "cultuurnet/cdb": 20,
         "symfony/console": 20
     },
+    "prefer-stable": false,
     "platform": {
         "php": ">=5.3.0"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }

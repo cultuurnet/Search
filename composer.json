@@ -6,8 +6,8 @@
         "php": ">=5.3.0",
         "cultuurnet/auth": "1.0.*@dev",
         "cultuurnet/cdb": "master@dev",
-        "guzzle/http": "3.1.*",
-        "guzzle/plugin-oauth": "3.1.*",
+        "guzzle/http": "3.*",
+        "guzzle/plugin-oauth": "3.*",
         "symfony/console": "2.2.*@dev"
     },
     "autoload": {
