@@ -4,17 +4,16 @@
     "license": "Apache-2.0",
     "require": {
         "php": ">=5.3.0",
-        "cultuurnet/auth": "1.0.*@dev",
+        "cultuurnet/auth": "~1.1",
         "cultuurnet/cdb": "master@dev",
-        "guzzle/http": "3.*",
-        "guzzle/plugin-oauth": "3.*",
-        "symfony/console": "2.2.*@dev"
+        "symfony/console": "~2.5"
     },
     "autoload": {
         "psr-0": {
             "CultuurNet\\Search": ["lib"]
         }
     },
+    "minimum-stability": "dev",
     "bin": ["bin/cultuurnet-search"],
     "extra": {
         "branch-alias": {

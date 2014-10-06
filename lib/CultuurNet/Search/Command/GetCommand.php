@@ -53,7 +53,6 @@ class GetCommand extends Command {
         $client = $clientFactory->createClient($searchBaseUrl, $this->session->getConsumerCredentials(), $tokenCredentials);
 
         $request = $client->get($input->getArgument('path'));
-        $request->getQuery()->setAggregator(new DuplicateAggregator());
 
         // @todo add query parameters, from JSON and/or yaml file or from simple CLI options
         //$getRequest->getQuery()->set($key, $value);

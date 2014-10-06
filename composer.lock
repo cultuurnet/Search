@@ -4,30 +4,30 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f9728b59bfd5d06a611192405b3eb3d3",
+    "hash": "6c5172e6781a471753957aa11d2fc1b6",
     "packages": [
         {
             "name": "cultuurnet/auth",
-            "version": "dev-guzzle-39-update",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cultuurnet/Auth.git",
-                "reference": "6bb8b37fe92b9acbf848f5008891c4cdac7ea345"
+                "reference": "3c9c2f0735c29bb07494a8af80d85b88842bbfae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cultuurnet/Auth/zipball/6bb8b37fe92b9acbf848f5008891c4cdac7ea345",
-                "reference": "6bb8b37fe92b9acbf848f5008891c4cdac7ea345",
+                "url": "https://api.github.com/repos/cultuurnet/Auth/zipball/3c9c2f0735c29bb07494a8af80d85b88842bbfae",
+                "reference": "3c9c2f0735c29bb07494a8af80d85b88842bbfae",
                 "shasum": ""
             },
             "require": {
-                "guzzle/http": "3.*",
-                "guzzle/plugin-cookie": "3.*",
-                "guzzle/plugin-log": "3.*",
-                "guzzle/plugin-oauth": "3.*",
+                "guzzle/http": "3.9.*",
+                "guzzle/plugin-cookie": "3.9.*",
+                "guzzle/plugin-log": "3.9.*",
+                "guzzle/plugin-oauth": "3.9.*",
                 "justinrainbow/json-schema": "1.3.*",
                 "php": ">=5.3.0",
-                "symfony/console": "2.2.*"
+                "symfony/console": "~2.5"
             },
             "bin": [
                 "bin/cultuurnet-auth"
@@ -35,7 +35,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.0.x-dev",
+                    "dev-develop": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -50,7 +51,7 @@
                 "Apache-2.0"
             ],
             "description": "Authentication service for CultuurNet web services",
-            "time": "2014-10-06 17:38:38"
+            "time": "2014-10-06 19:56:06"
         },
         {
             "name": "cultuurnet/cdb",
@@ -554,26 +555,36 @@
         },
         {
             "name": "symfony/console",
-            "version": "2.2.x-dev",
+            "version": "dev-master",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "89e82ad2d09ce753359efc942ce6309053023c47"
+                "reference": "771649efa94246e63a6ab2726ba908a358bdd403"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/89e82ad2d09ce753359efc942ce6309053023c47",
-                "reference": "89e82ad2d09ce753359efc942ce6309053023c47",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/771649efa94246e63a6ab2726ba908a358bdd403",
+                "reference": "771649efa94246e63a6ab2726ba908a358bdd403",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/event-dispatcher": "~2.1",
+                "symfony/process": "~2.1"
+            },
+            "suggest": {
+                "psr/log": "For using the console logger",
+                "symfony/event-dispatcher": "",
+                "symfony/process": ""
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2-dev"
+                    "dev-master": "2.6-dev"
                 }
             },
             "autoload": {
@@ -587,19 +598,17 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
-                },
-                {
                     "name": "Symfony Community",
                     "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2013-11-25 08:44:14"
+            "time": "2014-10-05 13:59:22"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -664,9 +673,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "cultuurnet/auth": 20,
-        "cultuurnet/cdb": 20,
-        "symfony/console": 20
+        "cultuurnet/cdb": 20
     },
     "prefer-stable": false,
     "platform": {

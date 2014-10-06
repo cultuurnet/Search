@@ -115,7 +115,6 @@ class Service extends OAuthProtectedService implements ServiceInterface {
 
     $client = $this->getClient();
     $request = $client->get($search_path = empty($types) ? 'search/suggest' : 'search/suggest/item');
-    $request->getQuery()->setAggregator(new DuplicateAggregator());
 
     if (!empty($types)) {
 
@@ -176,7 +175,6 @@ class Service extends OAuthProtectedService implements ServiceInterface {
     $client = $this->getClient();
 
     $request = $client->get($path);
-    $request->getQuery()->setAggregator(new DuplicateAggregator());
 
     $qFound = false;
 
