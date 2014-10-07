@@ -21,4 +21,15 @@ class FacetField extends AbstractParameter {
     $this->localParams['ex'] = implode(',', $tags);
   }
 
+  public function setFieldKey($key) {
+    $this->localParams['key'] = $key;
+
+    return $this;
+  }
+
+  public function setFacetPrefix($prefix) {
+    $this->localParams['facet.prefix'] = $prefix;
+
+    return $this;
+  }
 }

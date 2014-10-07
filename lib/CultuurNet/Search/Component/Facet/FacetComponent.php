@@ -24,6 +24,10 @@ class FacetComponent {
     return $this->facets[$field]->getParameter();
   }
 
+  public function setFacetField($key, FacetField $field) {
+    $this->facets[$key] = new Facet($key, $field);
+  }
+
   /**
    * @return Facet[]
    */
