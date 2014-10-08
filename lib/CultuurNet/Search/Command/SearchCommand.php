@@ -66,7 +66,13 @@ class SearchCommand extends Command {
       'query',
       InputArgument::REQUIRED,
       'Search query'
-    );
+    )
+      ->addOption(
+        'debug',
+        NULL,
+        InputOption::VALUE_NONE,
+        'Output full HTTP traffic for debugging purposes'
+      );
   }
 
   public function execute(InputInterface $in, OutputInterface $out) {
@@ -76,12 +82,15 @@ class SearchCommand extends Command {
 
     $user = $this->session->getUser();
     $tokenCredentials = NULL !== $user ? $user->getTokenCredentials() : NULL;
+    $consumerCredentials = $this->session->getConsumerCredentials();
 
-    $service = new Service(
-      $searchBaseUrl,
-      $this->session->getConsumerCredentials(),
-      $tokenCredentials
-    );
+      $service = SearchServiceFactory::createSearchService(
+        $in,
+        $out,
+        $searchBaseUrl,
+        $consumerCredentials,
+        $tokenCredentials
+      );
 
     $query = new Parameter\Query($in->getArgument('query'));
 
