@@ -7,9 +7,6 @@ use CultuurNet\Auth\ConsumerCredentials;
 use CultuurNet\Auth\TokenCredentials;
 use CultuurNet\Search\Guzzle\Service as SearchService;
 
-use Guzzle\Log\ClosureLogAdapter;
-use Guzzle\Plugin\Log\LogPlugin;
-
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
