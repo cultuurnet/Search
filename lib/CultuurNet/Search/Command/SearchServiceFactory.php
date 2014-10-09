@@ -2,9 +2,10 @@
 
 namespace CultuurNet\Search\Command;
 
+use CultuurNet\Auth\Command\CommandLineServiceFactory;
 use CultuurNet\Auth\ConsumerCredentials;
 use CultuurNet\Auth\TokenCredentials;
-use CultuurNet\Search\Guzzle\Service;
+use CultuurNet\Search\Guzzle\Service as SearchService;
 
 use Guzzle\Log\ClosureLogAdapter;
 use Guzzle\Plugin\Log\LogPlugin;
@@ -12,41 +13,24 @@ use Guzzle\Plugin\Log\LogPlugin;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class SearchServiceFactory {
-
-    private function __construct() {}
+class SearchServiceFactory extends CommandLineServiceFactory{
 
     /**
-     * Creates an auth service suitable for the command line.
+     * @inheritdoc
      *
-     * @param InputInterface $in
-     * @param OutputInterface $out
-     * @param string $baseUrl
-     * @param ConsumerCredentials $consumer
-     * @param TokenCredentials $token
-     *
-     * @return Service
+     * @return SearchService
      */
-    public static function createSearchService(
+    public function createService(
       InputInterface $in,
       OutputInterface $out,
       $baseUrl,
       ConsumerCredentials $consumer,
-      TokenCredentials $token)
+      TokenCredentials $token = null)
     {
-        $searchService = new Service($baseUrl, $consumer, $token);
+        $service = new SearchService($baseUrl, $consumer, $token);
 
-        if (TRUE == $in->getOption('debug')) {
-            $adapter = new ClosureLogAdapter(function ($message, $priority, $extras) use ($out) {
-                // @todo handle $priority
-                $out->writeln($message);
-            });
-            $format = "\n\n# Request:\n{request}\n\n# Response:\n{response}\n\n# Errors: {curl_code} {curl_error}\n\n";
-            $log = new LogPlugin($adapter, $format);
+        $this->registerSubscribers($in, $out, $service);
 
-            $searchService->getHttpClientFactory()->addSubscriber($log);
-        }
-
-        return $searchService;
+        return $service;
     }
 }
