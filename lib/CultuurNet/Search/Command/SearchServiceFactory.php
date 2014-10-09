@@ -17,7 +17,7 @@ class SearchServiceFactory {
     private function __construct() {}
 
     /**
-     * Creates an auth service suitable for the command line.
+     * Creates a search service suitable for the command line.
      *
      * @param InputInterface $in
      * @param OutputInterface $out
