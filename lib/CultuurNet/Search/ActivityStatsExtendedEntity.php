@@ -57,7 +57,7 @@ class ActivityStatsExtendedEntity {
 
   /**
    * Get the entity.
-   * @return CultureFeed_Cdb_Item_Base
+   * @return \CultureFeed_Cdb_Item_Base
    */
   public function getEntity() {
     return $this->entity;
