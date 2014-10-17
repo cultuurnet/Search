@@ -4,6 +4,7 @@ namespace CultuurNet\Search\Guzzle;
 
 use \CultuurNet\Auth\Guzzle\OAuthProtectedService;
 
+use CultuurNet\Search\Guzzle\Parameter\Collector;
 use \CultuurNet\Search\ServiceInterface;
 use \CultuurNet\Search\SearchResult;
 use \CultuurNet\Search\SuggestionsResult;
@@ -176,30 +177,8 @@ class Service extends OAuthProtectedService implements ServiceInterface {
 
     $request = $client->get($path);
 
-    $qFound = false;
-
-    foreach ($parameters as $parameter) {
-
-      if ('q' == $parameter->getKey()) {
-        $qFound = true;
-      }
-
-      $value = '';
-      $localParams = $parameter->getLocalParams();
-      if (!empty($localParams)) {
-        if (!isset($localParameterSerializer)) {
-          $localParameterSerializer = new LocalParameterSerializer();
-        }
-        $value = $localParameterSerializer->serialize($localParams);
-      }
-
-      $value .= $parameter->getValue();
-      $request->getQuery()->add($parameter->getKey(), $value);
-    }
-
-    if (!$qFound) {
-      // @todo throw an exception because the only mandatory parameter is not present
-    }
+    $collector = new Collector();
+    $collector->addParameters($parameters, $request->getQuery());
 
     $result = $request->send();
 
