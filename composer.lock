@@ -12,20 +12,20 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cultuurnet/Auth.git",
-                "reference": "972a63edcb24f063a1c1c62184dbc7ba6ac8a3b3"
+                "reference": "3b7f743d1e53927ca7e17b1168062bd4384dbe48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cultuurnet/Auth/zipball/972a63edcb24f063a1c1c62184dbc7ba6ac8a3b3",
-                "reference": "972a63edcb24f063a1c1c62184dbc7ba6ac8a3b3",
+                "url": "https://api.github.com/repos/cultuurnet/Auth/zipball/3b7f743d1e53927ca7e17b1168062bd4384dbe48",
+                "reference": "3b7f743d1e53927ca7e17b1168062bd4384dbe48",
                 "shasum": ""
             },
             "require": {
-                "guzzle/http": "3.9.*",
-                "guzzle/plugin-cookie": "3.9.*",
-                "guzzle/plugin-log": "3.9.*",
-                "guzzle/plugin-oauth": "3.9.*",
-                "justinrainbow/json-schema": "1.3.*",
+                "guzzle/http": "~3.9",
+                "guzzle/plugin-cookie": "~3.9",
+                "guzzle/plugin-log": "~3.9",
+                "guzzle/plugin-oauth": "~3.9",
+                "justinrainbow/json-schema": "~1.3",
                 "php": ">=5.3.0",
                 "symfony/console": "~2.5"
             },
@@ -51,7 +51,7 @@
                 "Apache-2.0"
             ],
             "description": "Authentication service for CultuurNet web services",
-            "time": "2014-10-21 07:44:05"
+            "time": "2014-10-22 07:15:46"
         },
         {
             "name": "cultuurnet/cdb",
@@ -974,12 +974,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "da5ee30bf37b6abd6213cc260791233e418f6967"
+                "reference": "0f79d81c1a15575abae595eaed189a262cee833d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/da5ee30bf37b6abd6213cc260791233e418f6967",
-                "reference": "da5ee30bf37b6abd6213cc260791233e418f6967",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0f79d81c1a15575abae595eaed189a262cee833d",
+                "reference": "0f79d81c1a15575abae595eaed189a262cee833d",
                 "shasum": ""
             },
             "require": {
@@ -1037,7 +1037,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-10-22 06:43:00"
+            "time": "2014-10-22 07:18:12"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
