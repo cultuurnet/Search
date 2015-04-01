@@ -45,6 +45,14 @@ class FacetResultItem {
     $this->subItems[] = $subItem;
   }
 
+	/**
+	 * Remove a subitem.
+	 * @param FacetResultItem $subItem
+	 */
+	public function removeSubItem($subItem) {
+		unset($this->subItems[$subItem]);
+	}
+
   /**
    * Does the current facet item has subitems.
    */
