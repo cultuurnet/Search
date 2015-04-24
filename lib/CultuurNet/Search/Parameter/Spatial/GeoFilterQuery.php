@@ -36,11 +36,11 @@ class GeoFilterQuery extends FilterQuery {
    */
   public function getValue() {
 
-    $value = urlencode('{') . '!geofilt ';
+    $value = '{' . '!geofilt ';
     $value .= $this->point->getKey() . '='. $this->point->getValue();
     $value .= ' ' . $this->field->getKey() . '=' . $this->field->getValue();
     $value .= ' ' . $this->distance->getKey() . '=' . $this->distance->getValue();
-    $value .= urlencode('}');
+    $value .= '}';
 
     return $value;
   }
