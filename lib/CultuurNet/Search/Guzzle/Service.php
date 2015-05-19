@@ -2,8 +2,10 @@
 
 namespace CultuurNet\Search\Guzzle;
 
+use CultuurNet\Auth\ConsumerCredentials;
 use \CultuurNet\Auth\Guzzle\OAuthProtectedService;
 
+use CultuurNet\Auth\TokenCredentials;
 use CultuurNet\Search\Guzzle\Parameter\Collector;
 use \CultuurNet\Search\ServiceInterface;
 use \CultuurNet\Search\SearchResult;
@@ -14,10 +16,38 @@ use \CultuurNet\Search\Parameter\Type;
 use \CultuurNet\Search\Parameter\Title;
 use \CultuurNet\Search\Parameter\LocalParameterSerializer;
 
-use Guzzle\Http\QueryAggregator\DuplicateAggregator;
 use \SimpleXMLElement;
 
 class Service extends OAuthProtectedService implements ServiceInterface {
+
+  /**
+   * @var string
+   */
+  private $cdbXmlVersion;
+
+  /**
+   * @var string
+   */
+  private $cdbXmlNamespaceUri;
+
+  public function __construct(
+    $baseUrl,
+    ConsumerCredentials $consumerCredentials,
+    TokenCredentials $tokenCredentials = NULL,
+    $cdbXmlVersion = '3.2'
+  ) {
+    parent::__construct(
+      $baseUrl,
+      $consumerCredentials,
+      $tokenCredentials
+    );
+
+    $this->cdbXmlVersion = $cdbXmlVersion;
+
+    $this->cdbXmlNamespaceUri = \CultureFeed_Cdb_Xml::namespaceUriForVersion(
+      $this->cdbXmlVersion
+    );
+  }
 
   /**
    * Execute a search call to the service.
@@ -27,7 +57,7 @@ class Service extends OAuthProtectedService implements ServiceInterface {
    */
   public function search($parameters = array()) {
     $response = $this->executeSearch('search', $parameters);
-    return SearchResult::fromXml(new SimpleXMLElement($response->getBody(true), 0, false, \CultureFeed_Cdb_Default::CDB_SCHEME_URL));
+    return SearchResult::fromXml(new SimpleXMLElement($response->getBody(true), 0, false, $this->cdbXmlNamespaceUri));
   }
 
   /**
@@ -52,7 +82,7 @@ class Service extends OAuthProtectedService implements ServiceInterface {
   public function detail($type, $id) {
 
     $response = $this->executeSearch('detail/' . $type . '/' . $id);
-    $xmlElement = new SimpleXMLElement($response->getBody(true), 0, false, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
+    $xmlElement = new SimpleXMLElement($response->getBody(true), 0, false, $this->cdbXmlNamespaceUri);
     $detail = $xmlElement->{$type};
     if (!empty($detail[0])) {
       return ActivityStatsExtendedEntity::fromXml($detail[0]);
@@ -156,7 +186,7 @@ class Service extends OAuthProtectedService implements ServiceInterface {
 
     $response = $request->send();
 
-    $xmlElement = new SimpleXMLElement($response->getBody(true), 0, false, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
+    $xmlElement = new SimpleXMLElement($response->getBody(true), 0, false, $this->cdbXmlNamespaceUri);
 
     return SuggestionsResult::fromXml($xmlElement);
 

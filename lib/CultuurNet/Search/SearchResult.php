@@ -37,6 +37,11 @@ class SearchResult {
   protected $xmlElement;
 
   /**
+   * @var string
+   */
+  protected $namespaceUri;
+
+  /**
    * @return ActivityStatsExtendedEntity[]
    */
   public function getItems() {
@@ -80,10 +85,14 @@ class SearchResult {
    * @param SimpleXMLElement $xmlElement
    * @return \CultuurNet\Search\SearchResult
    */
-  public static function fromXml(SimpleXMLElement $xmlElement) {
+  public static function fromXml(
+    SimpleXMLElement $xmlElement,
+    $namespace_uri = \CultureFeed_Cdb_Default::CDB_SCHEME_URL
+  ) {
 
     $result = new static();
 		$result->type = 'cdb';
+    $result->namespaceUri = $namespace_uri;
 
     $result->total = intval($xmlElement->nofrecords);
 
@@ -159,7 +168,14 @@ class SearchResult {
    * Don't allow the simple xml element to be serialized.
    */
   public function __sleep() {
-  	return array('total', 'type', 'items', 'suggestions', 'xml');
+  	return array(
+      'total',
+      'type',
+      'items',
+      'suggestions',
+      'xml',
+      'namespaceUri'
+    );
   }
 
   /**
@@ -169,7 +185,7 @@ class SearchResult {
 
   	$nameSpace = '';
   	if ($this->type == 'cdb') {
-  		$nameSpace = \CultureFeed_Cdb_Default::CDB_SCHEME_URL;
+  		$nameSpace = $this->namespaceUri;
   	}
 
   	$xmlElement = new SimpleXMLElement($this->getXml(), 0, FALSE, $nameSpace);
