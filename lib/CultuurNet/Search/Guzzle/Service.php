@@ -16,6 +16,7 @@ use \CultuurNet\Search\Parameter\Type;
 use \CultuurNet\Search\Parameter\Title;
 use \CultuurNet\Search\Parameter\LocalParameterSerializer;
 
+use Guzzle\Http\Message\RequestInterface;
 use \SimpleXMLElement;
 
 class Service extends OAuthProtectedService implements ServiceInterface {
@@ -67,7 +68,7 @@ class Service extends OAuthProtectedService implements ServiceInterface {
    * @return SearchResult
    */
   public function searchPages($parameters = array()) {
-    $response = $this->executeSearch('search/page', $parameters);
+    $response = $this->executeSearch('search/page', $parameters, false);
     return SearchResult::fromPagesXml(new SimpleXMLElement($response->getBody(true)));
   }
 
@@ -184,6 +185,8 @@ class Service extends OAuthProtectedService implements ServiceInterface {
       $request->getQuery()->add('past', 'true');
     }
 
+    $this->addVersionToRequest($request);
+
     $response = $request->send();
 
     $xmlElement = new SimpleXMLElement($response->getBody(true), 0, false, $this->cdbXmlNamespaceUri);
@@ -193,15 +196,29 @@ class Service extends OAuthProtectedService implements ServiceInterface {
   }
 
   /**
+   * Sets the cdbxml version query parameter on a HTTP request.
+   *
+   * @param RequestInterface $request
+   */
+  private function addVersionToRequest(RequestInterface $request)
+  {
+    if (version_compare($this->cdbXmlVersion, '3.3', '>=')) {
+      $request->getQuery()->add('version', $this->cdbXmlVersion);
+    }
+  }
+
+  /**
    * Perform a search call to the service
    * @param $path
    *   Path to call
    * @param array $parameters
    *   Parameters to be used in the request.
+   * @param bool $addVersion
+   *   Whether to add a version parameter indicating the acceptable cdb xml version or not.
    * @return SimpleXMLElement
    *   Xml returned from the call.
    */
-  private function executeSearch($path, $parameters = array()) {
+  private function executeSearch($path, $parameters = array(), $addVersion = true) {
 
     $client = $this->getClient();
 
@@ -210,9 +227,12 @@ class Service extends OAuthProtectedService implements ServiceInterface {
     $collector = new Collector();
     $collector->addParameters($parameters, $request->getQuery());
 
+    if ($addVersion) {
+      $this->addVersionToRequest($request);
+    }
+
     $result = $request->send();
 
     return $result;
   }
-
 }
