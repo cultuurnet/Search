@@ -2,8 +2,10 @@
 
 namespace CultuurNet\Search\Guzzle;
 
+use CultuurNet\Auth\ConsumerCredentials;
 use \CultuurNet\Auth\Guzzle\OAuthProtectedService;
 
+use CultuurNet\Auth\TokenCredentials;
 use CultuurNet\Search\Guzzle\Parameter\Collector;
 use \CultuurNet\Search\ServiceInterface;
 use \CultuurNet\Search\SearchResult;
@@ -14,10 +16,39 @@ use \CultuurNet\Search\Parameter\Type;
 use \CultuurNet\Search\Parameter\Title;
 use \CultuurNet\Search\Parameter\LocalParameterSerializer;
 
-use Guzzle\Http\QueryAggregator\DuplicateAggregator;
+use Guzzle\Http\Message\RequestInterface;
 use \SimpleXMLElement;
 
 class Service extends OAuthProtectedService implements ServiceInterface {
+
+  /**
+   * @var string
+   */
+  private $cdbXmlVersion;
+
+  /**
+   * @var string
+   */
+  private $cdbXmlNamespaceUri;
+
+  public function __construct(
+    $baseUrl,
+    ConsumerCredentials $consumerCredentials,
+    TokenCredentials $tokenCredentials = NULL,
+    $cdbXmlVersion = '3.2'
+  ) {
+    parent::__construct(
+      $baseUrl,
+      $consumerCredentials,
+      $tokenCredentials
+    );
+
+    $this->cdbXmlVersion = $cdbXmlVersion;
+
+    $this->cdbXmlNamespaceUri = \CultureFeed_Cdb_Xml::namespaceUriForVersion(
+      $this->cdbXmlVersion
+    );
+  }
 
   /**
    * Execute a search call to the service.
@@ -27,7 +58,7 @@ class Service extends OAuthProtectedService implements ServiceInterface {
    */
   public function search($parameters = array()) {
     $response = $this->executeSearch('search', $parameters);
-    return SearchResult::fromXml(new SimpleXMLElement($response->getBody(true), 0, false, \CultureFeed_Cdb_Default::CDB_SCHEME_URL));
+    return SearchResult::fromXml(new SimpleXMLElement($response->getBody(true), 0, false, $this->cdbXmlNamespaceUri));
   }
 
   /**
@@ -37,7 +68,7 @@ class Service extends OAuthProtectedService implements ServiceInterface {
    * @return SearchResult
    */
   public function searchPages($parameters = array()) {
-    $response = $this->executeSearch('search/page', $parameters);
+    $response = $this->executeSearch('search/page', $parameters, false);
     return SearchResult::fromPagesXml(new SimpleXMLElement($response->getBody(true)));
   }
 
@@ -52,7 +83,7 @@ class Service extends OAuthProtectedService implements ServiceInterface {
   public function detail($type, $id) {
 
     $response = $this->executeSearch('detail/' . $type . '/' . $id);
-    $xmlElement = new SimpleXMLElement($response->getBody(true), 0, false, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
+    $xmlElement = new SimpleXMLElement($response->getBody(true), 0, false, $this->cdbXmlNamespaceUri);
     $detail = $xmlElement->{$type};
     if (!empty($detail[0])) {
       return ActivityStatsExtendedEntity::fromXml($detail[0]);
@@ -154,12 +185,26 @@ class Service extends OAuthProtectedService implements ServiceInterface {
       $request->getQuery()->add('past', 'true');
     }
 
+    $this->addVersionToRequest($request);
+
     $response = $request->send();
 
-    $xmlElement = new SimpleXMLElement($response->getBody(true), 0, false, \CultureFeed_Cdb_Default::CDB_SCHEME_URL);
+    $xmlElement = new SimpleXMLElement($response->getBody(true), 0, false, $this->cdbXmlNamespaceUri);
 
     return SuggestionsResult::fromXml($xmlElement);
 
+  }
+
+  /**
+   * Sets the cdbxml version query parameter on a HTTP request.
+   *
+   * @param RequestInterface $request
+   */
+  private function addVersionToRequest(RequestInterface $request)
+  {
+    if (version_compare($this->cdbXmlVersion, '3.3', '>=')) {
+      $request->getQuery()->add('version', $this->cdbXmlVersion);
+    }
   }
 
   /**
@@ -168,10 +213,12 @@ class Service extends OAuthProtectedService implements ServiceInterface {
    *   Path to call
    * @param array $parameters
    *   Parameters to be used in the request.
+   * @param bool $addVersion
+   *   Whether to add a version parameter indicating the acceptable cdb xml version or not.
    * @return SimpleXMLElement
    *   Xml returned from the call.
    */
-  private function executeSearch($path, $parameters = array()) {
+  private function executeSearch($path, $parameters = array(), $addVersion = true) {
 
     $client = $this->getClient();
 
@@ -180,9 +227,12 @@ class Service extends OAuthProtectedService implements ServiceInterface {
     $collector = new Collector();
     $collector->addParameters($parameters, $request->getQuery());
 
+    if ($addVersion) {
+      $this->addVersionToRequest($request);
+    }
+
     $result = $request->send();
 
     return $result;
   }
-
 }
