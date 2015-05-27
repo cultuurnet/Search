@@ -58,7 +58,15 @@ class Service extends OAuthProtectedService implements ServiceInterface {
    */
   public function search($parameters = array()) {
     $response = $this->executeSearch('search', $parameters);
-    return SearchResult::fromXml(new SimpleXMLElement($response->getBody(true), 0, false, $this->cdbXmlNamespaceUri));
+    return SearchResult::fromXml(
+      new SimpleXMLElement(
+        $response->getBody(true),
+        0,
+        false,
+        $this->cdbXmlNamespaceUri
+      ),
+      $this->cdbXmlNamespaceUri
+    );
   }
 
   /**
