@@ -31,7 +31,7 @@ interface ServiceInterface {
    * @param array $extra_parameters
    *   Extra parameters to add to the search query.
    */
-  public function searchSuggestions($search_string, $types = array(), $past = FALSE, $extra_parameters = array());
+  public function searchSuggestions($search_string, $types = array(), $past = FALSE, $extra_parameters = array(), $max = null);
 
   /**
    * Load the detail of 1 item.

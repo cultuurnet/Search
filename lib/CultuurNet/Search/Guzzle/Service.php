@@ -151,8 +151,8 @@ class Service extends OAuthProtectedService implements ServiceInterface {
    * @param array $extra_parameters
    *   Extra parameters to add to the search query.
    */
-  public function searchSuggestions($search_string, $types = null, $past = FALSE, $extra_parameters = array()) {
-
+  public function searchSuggestions($search_string, $types = null, $past = FALSE, $extra_parameters = array(), $max = null) {
+    
     $client = $this->getClient();
     $request = $client->get($search_path = empty($types) ? 'search/suggest' : 'search/suggest/item');
 
@@ -191,6 +191,10 @@ class Service extends OAuthProtectedService implements ServiceInterface {
 
     if ($past) {
       $request->getQuery()->add('past', 'true');
+    }
+    
+    if ($max) {
+      $request->getQuery()->add('max', $max);
     }
 
     $this->addVersionToRequest($request);
