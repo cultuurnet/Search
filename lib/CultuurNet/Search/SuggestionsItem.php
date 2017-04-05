@@ -83,7 +83,7 @@ class SuggestionsItem {
    * @return \CultuurNet\Search\SuggestionItem
    */
   public static function fromXml(SimpleXMLElement $xmlElement) {
-    
+
     $suggestionItem = new static();
 
     $attributes = $xmlElement->attributes();
@@ -92,6 +92,9 @@ class SuggestionsItem {
 
     if (!empty($attributes['location'])) {
       $suggestionItem->setLocation((string) $attributes['location']);
+    }
+
+    if (!empty($attributes['zipcode'])) {
       $suggestionItem->setZipcode((string) $attributes['zipcode']);
     }
 
