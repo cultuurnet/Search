@@ -57,7 +57,7 @@ class Service extends OAuthProtectedService implements ServiceInterface {
    * @return SearchResult
    */
   public function search($parameters = array()) {
-    $response = $this->executeSearch('search', $parameters);
+    $response = $this->executeSearch('search/fast', $parameters);
     return SearchResult::fromXml(
       new SimpleXMLElement(
         $response->getBody(true),
@@ -76,7 +76,7 @@ class Service extends OAuthProtectedService implements ServiceInterface {
    * @return SearchResult
    */
   public function searchPages($parameters = array()) {
-    $response = $this->executeSearch('search/page', $parameters, false);
+    $response = $this->executeSearch('search/fast/page', $parameters, false);
     return SearchResult::fromPagesXml(new SimpleXMLElement($response->getBody(true)));
   }
 
@@ -112,7 +112,7 @@ class Service extends OAuthProtectedService implements ServiceInterface {
 
     $client = $this->getClient();
 
-    $request = $client->get('search/deleted');
+    $request = $client->get('search/fast/deleted');
 
     if (!empty($deleted_since)) {
       $request->getQuery()->add('deletedsince', $deleted_since);
@@ -152,9 +152,9 @@ class Service extends OAuthProtectedService implements ServiceInterface {
    *   Extra parameters to add to the search query.
    */
   public function searchSuggestions($search_string, $types = null, $past = FALSE, $extra_parameters = array(), $max = null) {
-    
+
     $client = $this->getClient();
-    $request = $client->get($search_path = empty($types) ? 'search/suggest' : 'search/suggest/item');
+    $request = $client->get($search_path = empty($types) ? 'search/fast/suggest' : 'search/fast/suggest/item');
 
     if (!empty($types)) {
 
@@ -192,7 +192,7 @@ class Service extends OAuthProtectedService implements ServiceInterface {
     if ($past) {
       $request->getQuery()->add('past', 'true');
     }
-    
+
     if ($max) {
       $request->getQuery()->add('max', $max);
     }
