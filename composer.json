@@ -4,7 +4,7 @@
     "license": "Apache-2.0",
     "require": {
         "php": ">=5.3.0",
-        "cultuurnet/auth": "dev-feature/symfony-3",
+        "cultuurnet/auth": "^3.0",
         "cultuurnet/cdb": "~2.1",
         "symfony/console": "~2.5|~3.0"
     },
